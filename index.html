@@ -9,93 +9,99 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- 아이콘 라이브러리 -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
     <!-- 폰트 설정 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- CSS 파일 연결 -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+    <!-- 로딩 오버레이 -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+            <p>데이터 처리 중...</p>
+        </div>
+    </div>
+
     <!-- 눈 효과 컨테이너 -->
     <div id="snow-container" class="absolute inset-0 pointer-events-none z-50 overflow-hidden"></div>
 
     <!-- === 1. 메인 페이지 === -->
     <section id="page-main" class="page-section active">
-        <!-- 배경 이미지 (경로 수정: img/main-bg.jpg) -->
-        <div class="absolute inset-0 z-0">
-            <img src="img/main-bg.jpg" alt="Main Background" class="w-full h-full object-cover opacity-80">
+        <div class="absolute inset-0 z-0 bg-slate-900">
+            <img src="img/main-bg.png" alt="Main Background" class="w-full h-full object-cover opacity-80" onerror="this.style.display='none';">
             <div class="absolute inset-0 bg-black/30"></div>
         </div>
 
-        <!-- 콘텐츠 -->
-        <div class="relative z-20 text-white px-4 text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 drop-shadow-lg text-yellow-100">
+        <div class="relative z-20 text-white px-4 text-center -mt-40">
+            <h1 class="text-[4.5rem] md:text-[5.5rem] font-bold drop-shadow-lg text-white font-tangerine tracking-wider">
                 Holy Data Tree
             </h1>
-            <p class="text-lg md:text-xl mb-12 opacity-90 font-light">
+            <p class="text-sm md:text-x0.5 mb-12 opacity-90 font-light">
                 서로의 감정으로 완성되는 시각디자인과 한 해의 기록
             </p>
 
-            <button onclick="goToPage('common')" class="bg-white text-slate-900 px-8 py-3 rounded-full text-lg font-bold hover:bg-yellow-100 transition-transform transform hover:scale-105 shadow-lg cursor-pointer">
+            <button onclick="goToPage('common')" class="bg-white text-slate-900 px-7 py-3 rounded-full text-sm hover:bg-yellow-100 transition-transform transform hover:scale-105 shadow-lg cursor-pointer">
                 기록하러 가기
             </button>
-
-            <p class="mt-8 text-sm text-gray-300">
-                현재 총 <span class="text-yellow-300 font-bold">120</span>개의 메시지가 트리에 걸렸어요!
-            </p>
+            
+            <div class="mt-8 space-x-4 text-sm text-gray-300">
+                <button onclick="goToPage('share_list')" class="underline hover:text-white">댓글 게시판</button>
+                <span>|</span>
+                <button onclick="goToPage('ranking')" class="underline hover:text-white">랭킹 게시판</button>
+            </div>
         </div>
     </section>
 
 
     <!-- === 2. 공통 질문 페이지 === -->
     <section id="page-common" class="page-section">
-        <!-- 공통 배경 (경로 수정: img/common-bg.png) -->
-        <div class="absolute inset-0 z-0">
-            <img src="img/common-bg.png" alt="Background" class="w-full h-full object-cover">
+        <div class="absolute inset-0 z-0 bg-slate-900">
+            <img src="img/common-bg.png" alt="Background" class="w-full h-full object-cover" onerror="this.style.display='none';">
         </div>
 
-        <!-- 헤더 -->
         <div class="absolute top-8 z-20 text-white text-center w-full">
-            <h2 class="text-3xl font-serif text-yellow-100 drop-shadow-md">Holy Data Tree</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-yellow-100 drop-shadow-md font-tangerine">Holy Data Tree</h2>
             <p class="text-sm opacity-80 mt-1">올 한해를 돌아보며 카드를 작성해주세요</p>
         </div>
 
-        <!-- 질문 폼 컨테이너 -->
-        <div class="relative z-20 w-full max-w-lg h-[75vh] md:h-[80vh] flex items-center justify-center p-4">
-            <div class="relative w-full h-full bg-white/95 rounded-lg shadow-2xl overflow-hidden flex flex-col">
-                <!-- 편지지 텍스처 (경로 수정: img/paper.jpg) -->
-                <div class="absolute inset-0 opacity-20 pointer-events-none">
-                    <img src="img/paper.jpg" class="w-full h-full object-cover" alt="texture">
-                </div>
-
-                <div class="relative z-10 flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar text-left">
+        <!-- 편지지 컨테이너 -->
+        <div class="relative z-20 w-full max-w-md h-auto flex flex-col items-center justify-center p-4 mt-20">
+            
+            <div class="relative w-full bg-[#fdfdfd] shadow-2xl aspect-[3/4]">
+                <img src="img/paper.png" class="absolute inset-0 w-full h-full object-fill opacity-100" alt="paper">
+                
+                <!-- 내용 영역 -->
+                <div class="absolute inset-0 p-8 md:p-14 flex flex-col text-left overflow-y-auto custom-scrollbar">
                     <!-- 이름 -->
-                    <div class="mb-6">
-                        <label class="block text-slate-700 font-bold mb-2">이름 (익명 가능)</label>
-                        <input type="text" id="input-name" class="w-full border-b-2 border-slate-300 focus:border-red-800 outline-none py-2 bg-transparent transition-colors" placeholder="이름을 입력하세요">
+                    <div class="mb-5">
+                        <label class="block text-slate-700 font-bold mb-1 text-sm">Q1.이름을 입력해주세요</label>
+                        <input type="text" id="input-name" class="w-full border-b-2 border-slate-300 focus:border-red-800 outline-none py-1 bg-transparent transition-colors text-sm" placeholder="익명도 가능해요!">
                     </div>
 
                     <!-- 소속 -->
-                    <div class="mb-6">
-                        <label class="block text-slate-700 font-bold mb-2">소속</label>
+                    <div class="mb-5">
+                        <label class="block text-slate-700 font-bold mb-2 text-sm">Q2.소속을 알려주세요</label>
                         <div class="flex flex-wrap gap-2" id="affiliation-group">
-                            <button type="button" class="aff-btn px-3 py-1.5 rounded-full text-sm border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="1학년">1학년</button>
-                            <button type="button" class="aff-btn px-3 py-1.5 rounded-full text-sm border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="2학년">2학년</button>
-                            <button type="button" class="aff-btn px-3 py-1.5 rounded-full text-sm border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="3학년">3학년</button>
-                            <button type="button" class="aff-btn px-3 py-1.5 rounded-full text-sm border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="전공심화">전공심화</button>
-                            <button type="button" class="aff-btn px-3 py-1.5 rounded-full text-sm border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="교수님">교수님</button>
+                            <button type="button" class="aff-btn px-3 py-1 rounded-full text-xs border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="1학년">1학년</button>
+                            <button type="button" class="aff-btn px-3 py-1 rounded-full text-xs border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="2학년">2학년</button>
+                            <button type="button" class="aff-btn px-3 py-1 rounded-full text-xs border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="3학년">3학년</button>
+                            <button type="button" class="aff-btn px-3 py-1 rounded-full text-xs border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="전공심화">전공심화</button>
+                            <button type="button" class="aff-btn px-3 py-1 rounded-full text-xs border bg-white text-slate-600 border-slate-300 hover:bg-slate-50 transition-all" data-value="교수님">교수님</button>
                         </div>
                     </div>
 
-                    <!-- 관심 분야 (3개 제한) -->
-                    <div class="mb-6">
-                        <label class="block text-slate-700 font-bold mb-2">
-                            관심 분야 <span class="text-sm font-normal text-red-600 ml-1">(최대 3개까지 선택)</span>
+                    <!-- 관심 분야 -->
+                    <div class="mb-5">
+                        <label class="block text-slate-700 font-bold mb-2 text-sm">
+                            Q3.관심 분야를 선택해주세요 <span class="text-xs font-normal text-red-600 ml-1">(최대 3개)</span>
                         </label>
-                        <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div class="grid grid-cols-2 gap-2 text-xs">
                             <label class="flex items-center space-x-2 cursor-pointer"><input type="checkbox" name="interests" value="브랜드 디자인"><span>브랜드 디자인</span></label>
                             <label class="flex items-center space-x-2 cursor-pointer"><input type="checkbox" name="interests" value="UIUX 디자인"><span>UIUX 디자인</span></label>
                             <label class="flex items-center space-x-2 cursor-pointer"><input type="checkbox" name="interests" value="편집 디자인"><span>편집 디자인</span></label>
@@ -109,21 +115,29 @@
                         </div>
                     </div>
 
-                    <!-- 작성 테마 -->
-                    <div class="mb-8">
-                        <label class="block text-slate-700 font-bold mb-2">작성 테마</label>
-                        <div id="theme-options" class="flex flex-col gap-2">
-                            <!-- JS로 테마 옵션이 렌더링 됨 -->
+                    <!-- 작성 테마 (토글 드롭다운 방식) -->
+                    <div class="mb-6 relative">
+                        <label class="block text-slate-700 font-bold mb-2 text-sm">Q4.작성 주제를 선택해주세요</label>
+                        
+                        <!-- 토글 버튼 -->
+                        <button type="button" id="theme-dropdown-btn" onclick="toggleThemeDropdown()" class="w-full flex justify-between items-center border-b-2 border-slate-300 py-1 text-sm text-slate-500 bg-transparent focus:outline-none">
+                            <span>주제를 선택해주세요</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="dropdown-arrow"></i>
+                        </button>
+
+                        <!-- 드롭다운 리스트 -->
+                        <div id="theme-dropdown-list" class="hidden absolute z-50 w-full bg-white border border-slate-200 shadow-lg mt-1 rounded-md overflow-hidden">
+                            <!-- JS로 옵션이 채워집니다 -->
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Next 버튼 -->
-                <div class="p-4 border-t bg-slate-50 flex justify-end z-10">
-                    <button onclick="validateAndGoToGrade()" class="bg-slate-900 text-white px-6 py-2 rounded hover:bg-slate-700 flex items-center transition-colors">
-                        Next <i data-lucide="chevron-right" class="ml-1 w-4 h-4"></i>
-                    </button>
-                </div>
+            <!-- Next 버튼 -->
+            <div class="mt-6 flex justify-center">
+                <button onclick="validateAndGoToGrade()" class="bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-slate-700 flex items-center transition-colors shadow-lg font-bold text-lg">
+                    Next <i data-lucide="chevron-right" class="ml-1 w-5 h-5"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -131,41 +145,42 @@
 
     <!-- === 3. 학년 질문 페이지 === -->
     <section id="page-grade" class="page-section">
-        <!-- 공통 배경 (경로 수정: img/common-bg.png) -->
-        <div class="absolute inset-0 z-0">
-            <img src="img/common-bg.png" alt="Background" class="w-full h-full object-cover">
+        <div class="absolute inset-0 z-0 bg-slate-900">
+            <img src="img/common-bg.png" class="w-full h-full object-cover" alt="Background">
         </div>
 
-        <!-- 헤더 -->
         <div class="absolute top-8 z-20 text-white text-center w-full">
-            <h2 class="text-3xl font-serif text-yellow-100 drop-shadow-md">Holy Data Tree</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-yellow-100 drop-shadow-md font-tangerine">Holy Data Tree</h2>
             <p id="grade-header-subtitle" class="text-sm opacity-80 mt-1"></p>
         </div>
 
-        <!-- 편지지 컨테이너 -->
-        <div class="relative z-20 w-full max-w-md h-auto flex flex-col items-center justify-center p-4">
+        <div class="relative z-20 w-full max-w-md h-auto flex flex-col items-center justify-center p-4 mt-20">
             <div class="relative w-full bg-[#fdfdfd] shadow-2xl aspect-[3/4]">
-                <!-- 텍스처 (경로 수정: img/paper.jpg) -->
-                <img src="img/paper.jpg" class="absolute inset-0 w-full h-full object-fill opacity-100" alt="paper">
+                <img src="img/paper.png" class="absolute inset-0 w-full h-full object-fill opacity-100" alt="paper">
                 
-                <!-- 내용 -->
-                <div class="absolute inset-0 p-8 md:p-10 flex flex-col text-left">
-                    <div class="mb-4">
-                        <span id="selected-info-badge" class="inline-block bg-red-800 text-white text-xs px-2 py-1 rounded mb-2"></span>
-                        <h3 id="question-text" class="text-slate-800 font-bold leading-snug text-sm md:text-base break-keep"></h3>
+                <div class="absolute inset-0 p-8 md:p-14 flex flex-col text-left">
+                    <!-- 상단 정보 표시 -->
+                    <div class="mb-4 border-b border-gray-300 pb-2">
+                        <p class="text-xs text-slate-500">작성자: <span id="display-name" class="font-bold text-slate-800"></span> (<span id="display-affiliation"></span>)</p>
+                        <p class="text-xs text-slate-500 mt-1">주제: <span id="display-theme" class="font-bold text-red-800"></span></p>
+                    </div>
+
+                    <!-- 글 제목 입력 -->
+                    <div class="mb-2">
+                        <input type="text" id="post-title" class="w-full bg-transparent border-b border-slate-300 focus:border-red-800 outline-none py-1 text-lg text-slate-800 placeholder-slate-400" placeholder="제목을 입력해주세요">
                     </div>
                     
                     <!-- 메시지 입력창 -->
-                    <textarea id="message-input" class="lined-textarea flex-1" placeholder="여기에 이야기를 적어주세요..."></textarea>
+                    <textarea id="post-content" class="lined-textarea flex-1" placeholder="이곳에 당신의 이야기를 적어주세요..."></textarea>
                 </div>
             </div>
 
             <!-- 하단 버튼 -->
             <div class="mt-6 flex space-x-4">
-                <button onclick="goToPage('common')" class="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full hover:bg-white/30 flex items-center transition-all">
+                <button onclick="goToPage('common')" class="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full hover:bg-white/30 flex items-center transition-all cursor-pointer">
                     <i data-lucide="chevron-left" class="mr-1 w-4 h-4"></i> Back
                 </button>
-                <button onclick="validateAndGoToAnimation()" class="bg-red-800 text-white px-8 py-2 rounded-full hover:bg-red-700 shadow-lg font-bold flex items-center transition-all">
+                <button onclick="submitSurvey()" class="bg-red-800 text-white px-8 py-2 rounded-full hover:bg-red-700 shadow-lg font-bold flex items-center transition-all cursor-pointer">
                     Finish <i data-lucide="chevron-right" class="ml-1 w-4 h-4"></i>
                 </button>
             </div>
@@ -175,33 +190,95 @@
 
     <!-- === 4. 봉투 애니메이션 페이지 === -->
     <section id="page-animation" class="page-section">
-        <!-- 공통 배경 (경로 수정: img/common-bg.png) -->
-        <div class="absolute inset-0 z-0">
-            <img src="img/common-bg.png" alt="Background" class="w-full h-full object-cover">
+        <div class="absolute inset-0 z-0 bg-slate-900">
+            <img src="img/common-bg.png" class="w-full h-full object-cover" alt="Background">
         </div>
 
         <div class="relative z-20 flex flex-col items-center justify-center w-full h-full">
-            <div class="relative w-64 md:w-80 aspect-[1.4/1]">
-                <!-- 1. 봉투 뒷면 (경로 수정: img/envelope-back.jpg) -->
-                <img src="img/envelope-back.jpg" class="absolute inset-0 w-full h-full object-contain z-0" alt="Envelope Back">
-
-                <!-- 2. 편지지 -->
-                <div id="animating-paper" class="absolute left-1/2 -translate-x-1/2 -top-24 bg-white w-[90%] h-[120%] shadow-md p-4 z-10 transition-all duration-[1500ms] ease-in-out">
-                    <img src="img/paper.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="texture">
-                    <p id="final-message-preview" class="relative text-[10px] text-slate-500 line-clamp-3 mt-2"></p>
+            
+            <!-- [수정] 봉투 크기 확대: w-64 -> w-96 / md:w-80 -> md:w-[35rem] -->
+            <div class="relative w-96 md:w-[35rem] aspect-[1.4/1]">
+                
+                <!-- [추가] 열린 봉투 그룹 (편지 들어가기 전) -->
+                <div id="envelope-open" class="absolute inset-0 w-full h-full transition-opacity duration-500">
+                    <img src="img/envelope-back.png" class="absolute inset-0 w-full h-full object-contain z-0" alt="Envelope Back">
+                    
+                    <!-- 편지지 (움직이는 요소) -->
+                    <div id="animating-paper" class="absolute left-1/2 -translate-x-1/2 -top-24 bg-white w-[90%] h-[120%] shadow-md p-4 z-10 transition-all duration-[1500ms] ease-in-out">
+                        <img src="img/paper.png" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="texture">
+                        <p id="final-message-preview" class="relative text-[10px] text-slate-500 line-clamp-3 mt-2"></p>
+                    </div>
+                    
+                    <img src="img/envelope-front.png" class="absolute bottom-0 left-0 w-full h-full object-contain z-20 pointer-events-none" alt="Envelope Front">
                 </div>
 
-                <!-- 3. 봉투 앞면 (경로 수정: img/envelope-front.jpg) -->
-                <img src="img/envelope-front.jpg" class="absolute bottom-0 left-0 w-full h-full object-contain z-20 pointer-events-none" alt="Envelope Front">
-            </div>
+                <!-- [추가] 닫힌 봉투 (처음엔 숨김) -->
+                <img id="envelope-closed" src="img/envelope.png" class="absolute inset-0 w-full h-full object-contain z-30 opacity-0 transition-opacity duration-500" alt="Closed Envelope">
 
+            </div>
             <div id="loading-text" class="absolute bottom-20 text-white text-center animate-pulse mt-8">
                 봉투에 담는 중...
             </div>
         </div>
     </section>
 
-    <!-- JS 파일 연결 -->
+    <!-- === 5. 목록 및 랭킹 페이지 === -->
+    <section id="page-share_list" class="page-section">
+        <div class="absolute inset-0 z-0 bg-slate-900">
+            <img src="img/main-bg.png" alt="BG" class="w-full h-full object-cover opacity-50">
+        </div>
+        <div class="relative z-20 w-full max-w-4xl h-full flex flex-col p-6 pt-10">
+            <div class="text-center mb-6 text-white">
+                <h2 class="text-5xl font-tangerine mb-2 text-yellow-100">Shared Messages</h2>
+                <p class="text-lg opacity-80">"고민이 담긴 카드에 당신의 응원을 선물해주세요."</p>
+            </div>
+            <div class="flex justify-between items-center mb-4">
+                <button onclick="goToPage('common')" class="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm">← 새 카드 작성</button>
+                <button onclick="goToPage('ranking')" class="bg-slate-700 text-white px-4 py-2 rounded-lg hover:bg-slate-600 text-sm">랭킹 보기 →</button>
+            </div>
+            <div id="post-list-area" class="flex-1 overflow-y-auto p-4 rounded-xl custom-scrollbar bg-white/10 backdrop-blur-md border border-white/20">
+                <p id="list-status" class="text-center text-white mt-10">목록을 불러오는 중...</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="page-ranking" class="page-section">
+        <div class="absolute inset-0 z-0 bg-slate-900">
+            <img src="img/main-bg.png" alt="BG" class="w-full h-full object-cover opacity-50">
+        </div>
+        <div class="relative z-20 w-full max-w-md h-full flex flex-col p-6 pt-10 text-center">
+            <h2 class="text-5xl font-tangerine mb-6 text-yellow-100">Interest Ranking</h2>
+            <div class="flex justify-center space-x-4 mb-6 text-lg">
+                <button class="text-yellow-200 font-bold underline" onclick="filterRanking('')">전체 순위</button>
+                <button class="text-gray-400 hover:text-white" onclick="filterRanking('1학년')">1학년</button>
+                <button class="text-gray-400 hover:text-white" onclick="filterRanking('2학년')">2학년</button>
+            </div>
+            <div id="full-ranking-list" class="flex-1 overflow-y-auto bg-black/30 p-4 rounded-xl border border-gray-600"></div>
+            <div class="mt-6">
+                <button onclick="goToPage('share_list')" class="bg-white text-slate-900 px-6 py-2 rounded-full hover:bg-gray-200 font-bold">목록으로</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="post-detail-modal" class="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-[100] hidden">
+        <div class="relative w-full max-w-3xl mx-4" style="aspect-ratio: 1.4/1; background-image: url('https://i.imgur.com/3YOgwUI.png'); background-size: 100% 100%; padding: 8% 10%;">
+            <button id="close-modal-btn" class="absolute top-4 right-8 text-4xl text-[#9d5050]">&times;</button>
+            <div class="h-full overflow-y-auto custom-scrollbar pr-2">
+                <h2 class="font-serif text-3xl text-center border-b border-[#9d5050] pb-2 mb-2 text-[#4a2d2d]" id="detail-title"></h2>
+                <p class="text-sm italic mb-6 text-right text-[#666]" id="detail-id"></p>
+                <div class="bg-white/50 p-4 rounded mb-6 text-lg text-[#4a2d2d] min-h-[100px] whitespace-pre-wrap" id="detail-content"></div>
+                <div class="border-t border-[#9d5050] pt-4">
+                    <h3 class="text-lg font-bold mb-2 text-[#4a2d2d]">응원의 메시지</h3>
+                    <div class="flex gap-2">
+                        <input id="comment-input" class="flex-1 bg-transparent border-b border-[#9d5050] outline-none p-1" placeholder="따뜻한 한마디...">
+                        <button id="submit-comment-btn" class="bg-[#9d5050] text-white px-4 py-1 rounded text-sm">전송</button>
+                    </div>
+                    <div id="comments-list" class="mt-4 space-y-2 max-h-[150px] overflow-y-auto"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

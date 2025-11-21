@@ -1,200 +1,331 @@
-// === 1. 데이터 정의 ===
-const QUESTIONS = {
-    '1학년': {
-        '올해의 추억': '올해 새로운 대학생활 속에서 가장 기억에 남았던 순간은 무엇인가요?',
-        '현재의 고민': '올해 대학 생활을 적응하는 과정에서 가장 고민 되었던 점은 무엇이었나요?',
-        '미래를 위한 다짐': '앞으로 대학생활에서 꼭 이루고 싶은 목표가 있다면 무엇인가요?',
-    },
-    '2학년': {
-        '올해의 추억': '올해 스스로의 전공 분야를 더 깊이 탐색하며 가장 의미 있었던 순간은 무엇이었나요?',
-        '현재의 고민': '전공 활동이나 경험을 넓혀가는 과정에서 가장 고민 되었던 점은 무엇이었나요?',
-        '미래를 위한 다짐': '2학년을 마무리하며 앞으로 전공 분야에서 꼭 이루고 싶은 목표는 무엇인가요?',
-    },
-    '3학년': {
-        '올해의 추억': '올해 졸업과 진로를 준비하며 가장 기억에 남았던 경험이나 성취는 무엇인가요?',
-        '현재의 고민': '포트폴리오·실무 경험·취업 준비 과정에서 가장 크게 느꼈던 고민은 무엇이었나요?',
-        '미래를 위한 다짐': '졸업 이후의 진로를 향해 앞으로 꼭 이루고 싶은 목표는 무엇인가요?',
-    },
-    '전공심화': {
-        '올해의 추억': '이번 해, 가장 기억에 남는 순간은 언제였나요?',
-        '현재의 고민': '현재 가장 마음을 쓰고 있는 고민은 무엇인가요?',
-        '미래를 위한 다짐': '앞으로의 목표나 다짐을 적어주세요.',
-    },
-    '교수님': {
-        '응원': '학생들에게 전해주고 싶은 따뜻한 응원의 한마디를 부탁드립니다.',
-        '조언': '학생들에게 도움이 될 만한 진심 어린 조언을 부탁드립니다.',
-    }
-};
+// === 설정 (지혜님 API) ===
+const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyvbLW5WgbxUCbNVw4EpETNotU25LD8YjikIDVSUCJySiBFICBjKbxFgDz6M5hen83u4g/exec"; 
 
-// === 2. 상태 변수 ===
+// === 상태 변수 ===
 let formData = {
     name: '',
     affiliation: '',
     interests: [],
     theme: '',
-    message: ''
+    title: '',   // 추가됨
+    content: ''  // message -> content 로 변경
 };
+let postDataCache = [];
 
-// === 3. 초기화 및 이벤트 리스너 ===
+// === 초기화 ===
 document.addEventListener('DOMContentLoaded', () => {
-    lucide.createIcons(); // 아이콘 렌더링
-    createSnow(); // 눈 내리는 효과 시작
-    
-    // 소속 버튼 클릭 이벤트 처리
+    try {
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+    } catch (e) {}
+
+    createSnow();
+    setupEventListeners();
+});
+
+function setupEventListeners() {
+    // 소속 버튼 클릭
     const affButtons = document.querySelectorAll('.aff-btn');
     affButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // 기존 선택 해제 및 스타일 초기화
+            // 1. 모든 버튼 초기화 (비활성 상태로)
             affButtons.forEach(b => {
-                b.classList.remove('bg-red-800', 'text-white', 'border-red-800');
+                // [수정] hover:text-red-800 클래스도 함께 제거해야 함
+                b.classList.remove('bg-red-800', 'text-white', 'border-red-800', 'hover:text-red-800');
                 b.classList.add('bg-white', 'text-slate-600', 'border-slate-300');
             });
-            
-            // 선택된 버튼 스타일 적용
+
+            // 2. 선택된 버튼 활성화
             btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-300');
-            btn.classList.add('bg-red-800', 'text-white', 'border-red-800');
+            // [수정] hover:text-red-800 클래스 추가 (마우스 올리면 글자 빨간색)
+            btn.classList.add('bg-red-800', 'text-white', 'border-red-800', 'hover:text-red-800');
             
-            // 데이터 저장
             formData.affiliation = btn.getAttribute('data-value');
-            formData.theme = ''; // 소속 바뀌면 테마 초기화
+            formData.theme = ''; 
             
-            // 테마 옵션 다시 그리기
+            // 소속이 변경되면 드롭다운 내용 갱신 및 초기화
             renderThemeOptions(formData.affiliation);
+            document.querySelector('#theme-dropdown-btn span').textContent = "테마를 선택해주세요";
+            document.querySelector('#theme-dropdown-btn span').classList.add('text-slate-500');
         });
     });
 
-    // [추가됨] 관심 분야 체크박스 선택 제한 (최대 3개)
+    // 관심분야 3개 제한
     const interestCheckboxes = document.querySelectorAll('input[name="interests"]');
     interestCheckboxes.forEach(box => {
         box.addEventListener('change', function() {
             const checkedCount = document.querySelectorAll('input[name="interests"]:checked').length;
             if (checkedCount > 3) {
-                this.checked = false; // 현재 체크 취소
+                this.checked = false;
                 alert('관심 분야는 최대 3개까지만 선택 가능합니다.');
             }
         });
     });
-});
 
-// === 4. 주요 함수 ===
+    // 모달 닫기
+    document.getElementById('close-modal-btn').onclick = () => {
+        document.getElementById('post-detail-modal').classList.add('hidden');
+    };
+    
+    // 댓글 전송
+    document.getElementById('submit-comment-btn').onclick = handleSubmitComment;
 
-// 페이지 이동 함수
+    // 드롭다운 외부 클릭 시 닫기
+    document.addEventListener('click', function(e) {
+        const dropdown = document.getElementById('theme-dropdown-list');
+        const btn = document.getElementById('theme-dropdown-btn');
+        if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+            dropdown.classList.add('hidden');
+            document.getElementById('dropdown-arrow').classList.remove('rotate-180');
+        }
+    });
+}
+
+// === 토글 드롭다운 관련 함수 ===
+function toggleThemeDropdown() {
+    const dropdown = document.getElementById('theme-dropdown-list');
+    const arrow = document.getElementById('dropdown-arrow');
+    
+    if (dropdown.classList.contains('hidden')) {
+        // 소속을 먼저 선택했는지 확인
+        if (!formData.affiliation) {
+            alert('소속을 먼저 선택해주세요.');
+            return;
+        }
+        dropdown.classList.remove('hidden');
+        arrow.classList.add('rotate-180');
+    } else {
+        dropdown.classList.add('hidden');
+        arrow.classList.remove('rotate-180');
+    }
+}
+
+function selectTheme(themeValue) {
+    formData.theme = themeValue;
+    
+    // 버튼 텍스트 업데이트
+    const btnSpan = document.querySelector('#theme-dropdown-btn span');
+    btnSpan.textContent = themeValue;
+    btnSpan.classList.remove('text-slate-500');
+    btnSpan.classList.add('text-slate-800', 'font-bold');
+    
+    // 드롭다운 닫기
+    toggleThemeDropdown();
+}
+
+// 테마 옵션 렌더링 (드롭다운 아이템 생성)
+function renderThemeOptions(affiliation) {
+    const container = document.getElementById('theme-dropdown-list');
+    container.innerHTML = ''; 
+    let themes = (affiliation === '교수님') ? ['응원', '조언'] : ['올해의 추억', '현재의 고민', '미래를 위한 다짐'];
+    
+    themes.forEach(theme => {
+        const div = document.createElement('div');
+        div.className = 'px-4 py-2 hover:bg-slate-100 cursor-pointer text-sm text-slate-700 border-b border-slate-100 last:border-0';
+        div.textContent = theme;
+        div.onclick = () => selectTheme(theme);
+        container.appendChild(div);
+    });
+}
+
+// === API 호출 함수 ===
+async function gasCall(action, data = {}, method = 'POST') {
+    document.getElementById('loading-overlay').classList.remove('hidden');
+    try {
+        let response;
+        const payload = { action: action, ...data };
+        if (method === 'POST') {
+             response = await fetch(GAS_WEB_APP_URL, { method: 'POST', body: JSON.stringify(payload) });
+        } else {
+            const params = new URLSearchParams({ action: action, data: JSON.stringify(data) });
+            response = await fetch(`${GAS_WEB_APP_URL}?${params.toString()}`, { method: 'GET' });
+        }
+        return JSON.parse(await response.text());
+    } catch (error) {
+        alert(`오류 발생: ${error.message}`);
+        return { success: false };
+    } finally {
+        document.getElementById('loading-overlay').classList.add('hidden');
+    }
+}
+
+// === 페이지 이동 및 로직 ===
 function goToPage(pageId) {
-    // 모든 페이지 숨기기
     document.querySelectorAll('.page-section').forEach(el => {
         el.classList.remove('active');
-        setTimeout(() => {
-            if(!el.classList.contains('active')) el.style.display = 'none';
-        }, 500); // 페이드 아웃 시간 고려
+        setTimeout(() => { if(!el.classList.contains('active')) el.style.display = 'none'; }, 500);
     });
-
-    // 선택한 페이지 보이기
     const target = document.getElementById('page-' + pageId);
     target.style.display = 'flex';
-    // display:flex 적용 후 약간의 딜레이 뒤 opacity 변경해야 트랜지션 적용됨
-    setTimeout(() => {
-        target.classList.add('active');
-    }, 10);
-}
+    setTimeout(() => target.classList.add('active'), 10);
 
-// 테마 옵션 렌더링
-function renderThemeOptions(affiliation) {
-    const container = document.getElementById('theme-options');
-    container.innerHTML = ''; // 초기화
-
-    let themes = [];
-    if (affiliation === '교수님') {
-        themes = ['응원', '조언'];
-    } else {
-        themes = ['올해의 추억', '현재의 고민', '미래를 위한 다짐'];
-    }
-
-    themes.forEach(theme => {
-        const label = document.createElement('label');
-        label.className = 'flex items-center space-x-3 p-2 border rounded-lg cursor-pointer hover:bg-slate-50 transition-colors';
-        label.innerHTML = `
-            <input type="radio" name="theme" value="${theme}" class="accent-red-800 w-4 h-4" onclick="formData.theme = '${theme}'">
-            <span class="text-slate-800 text-sm font-medium">${theme}</span>
-        `;
-        container.appendChild(label);
-    });
-}
-
-// 공통 질문 페이지 유효성 검사 및 이동
-function validateAndGoToGrade() {
-    // 이름 저장
-    formData.name = document.getElementById('input-name').value;
+    if (pageId === 'share_list') fetchPostList();
+    if (pageId === 'ranking') fetchRanking('');
     
-    // 관심분야 저장
+    // 애니메이션 페이지 초기화 (다시 작성할 때를 대비)
+    if (pageId !== 'animation') {
+        const openEnv = document.getElementById('envelope-open');
+        const closedEnv = document.getElementById('envelope-closed');
+        const paper = document.getElementById('animating-paper');
+        
+        if(openEnv) openEnv.classList.remove('opacity-0');
+        if(closedEnv) closedEnv.classList.add('opacity-0');
+        if(paper) paper.classList.remove('slide-into-envelope');
+    }
+}
+
+// 공통 질문 -> 학년 질문 이동
+function validateAndGoToGrade() {
+    formData.name = document.getElementById('input-name').value || "익명";
+    
     const checkedInterests = document.querySelectorAll('input[name="interests"]:checked');
     formData.interests = Array.from(checkedInterests).map(cb => cb.value);
 
-    // 검사
-    if (!formData.name || !formData.affiliation || !formData.theme) {
-        alert('이름, 소속, 그리고 테마를 모두 선택해주세요!');
+    if (!formData.affiliation || !formData.theme) {
+        alert('소속과 테마를 선택해주세요!');
+        return;
+    }
+    if (formData.interests.length === 0) {
+        alert('관심분야를 최소 1개 선택해주세요.');
         return;
     }
 
-    // 학년 질문 페이지 데이터 세팅
     document.getElementById('grade-header-subtitle').textContent = `(${formData.theme})`;
-    document.getElementById('selected-info-badge').textContent = `${formData.affiliation} - ${formData.theme}`;
+    document.getElementById('display-name').textContent = formData.name;
+    document.getElementById('display-affiliation').textContent = formData.affiliation;
+    document.getElementById('display-theme').textContent = formData.theme;
     
-    // 질문 텍스트 가져오기
-    const qText = QUESTIONS[formData.affiliation]?.[formData.theme] || "메시지를 남겨주세요.";
-    document.getElementById('question-text').textContent = qText;
-    
-    // 메시지 초기화
-    document.getElementById('message-input').value = formData.message || '';
-
     goToPage('grade');
 }
 
-// 학년 질문 페이지 유효성 검사 및 애니메이션 이동
-function validateAndGoToAnimation() {
-    const msg = document.getElementById('message-input').value;
-    if (!msg) {
-        alert('메시지를 작성해주세요!');
+// 최종 제출 (애니메이션 적용)
+async function submitSurvey() {
+    const title = document.getElementById('post-title').value;
+    const content = document.getElementById('post-content').value;
+
+    if (!title || !content) {
+        alert('제목과 내용을 모두 작성해주세요.');
         return;
     }
-    formData.message = msg;
-    document.getElementById('final-message-preview').textContent = msg;
 
-    goToPage('animation');
+    const finalData = {
+        name: formData.name,
+        affiliation: formData.affiliation,
+        interests: formData.interests.join(', '),
+        postType: formData.theme,
+        title: title,
+        content: content
+    };
 
-    // 애니메이션 실행
-    setTimeout(() => {
-        document.getElementById('loading-text').textContent = "트리에 메시지를 걸고 있어요...";
-        const paper = document.getElementById('animating-paper');
-        paper.classList.add('slide-into-envelope');
-    }, 500);
+    const result = await gasCall('savePost', finalData, 'POST');
 
-    // (시뮬레이션) 완료 후 처리 - 여기서는 3.5초 뒤 알림
-    // setTimeout(() => {
-    //     alert('기록이 완료되었습니다! (데모 종료)');
-    // }, 3500);
+    if (result.success) {
+        document.getElementById('final-message-preview').textContent = content;
+        
+        goToPage('animation');
+
+        // 1. 편지 들어가기 (0.1초 후 시작)
+        setTimeout(() => {
+            document.getElementById('loading-text').textContent = "트리에 메시지가 걸렸어요!";
+            document.getElementById('animating-paper').classList.add('slide-into-envelope');
+        }, 100);
+
+        // 2. 봉투 닫기 (1.6초 후 - 편지가 다 들어간 뒤)
+        setTimeout(() => {
+            document.getElementById('envelope-open').classList.add('opacity-0'); // 열린 봉투 숨기기
+            document.getElementById('envelope-closed').classList.remove('opacity-0'); // 닫힌 봉투 보이기
+        }, 1600);
+
+        // 3. 목록으로 이동 (3.5초 후)
+        setTimeout(() => {
+            goToPage('share_list');
+        }, 3500);
+    } else {
+        alert('저장에 실패했습니다: ' + result.message);
+    }
 }
 
-// 눈 내리는 효과 생성 함수
+// 목록 불러오기
+async function fetchPostList() {
+    const listArea = document.getElementById('post-list-area');
+    listArea.innerHTML = '<p class="text-center text-white">로딩 중...</p>';
+    const result = await gasCall('getPostList', {}, 'GET');
+    if (result.success && Array.isArray(result.data)) {
+        postDataCache = result.data;
+        if (postDataCache.length === 0) {
+            listArea.innerHTML = '<p class="text-center text-white">작성된 글이 없습니다.</p>';
+        } else {
+            listArea.innerHTML = postDataCache.map(post => `
+                <div class="list-item" onclick="showPostDetail('${post.ID}')">
+                    <p class="text-xs text-gray-400">${post.Name} | ${post.Affiliation}</p>
+                    <p class="text-lg font-bold text-white">${post.Title}</p>
+                </div>
+            `).join('');
+        }
+    }
+}
+
+// 상세 보기
+function showPostDetail(postId) {
+    const post = postDataCache.find(p => String(p.ID) === String(postId));
+    if (!post) return;
+    document.getElementById('detail-title').textContent = post.Title;
+    document.getElementById('detail-id').textContent = `From. ${post.Name} (${post.Affiliation})`;
+    document.getElementById('detail-content').textContent = post.Content;
+    document.getElementById('submit-comment-btn').dataset.postId = postId;
+    document.getElementById('comments-list').innerHTML = '';
+    fetchComments(postId);
+    document.getElementById('post-detail-modal').classList.remove('hidden');
+}
+
+async function fetchComments(postId) {
+    const result = await gasCall('getComments', { postId: postId }, 'GET');
+    const list = document.getElementById('comments-list');
+    if (result.success && result.data.length) {
+        list.innerHTML = result.data.map(c => `
+            <div class="bg-gray-100 p-2 rounded text-sm mt-2">
+                <span class="font-bold text-[#9d5050]">${c.CommenterName}:</span> ${c.CommentContent}
+            </div>`).join('');
+    } else {
+        list.innerHTML = '<p class="text-xs text-gray-500">아직 댓글이 없습니다.</p>';
+    }
+}
+
+async function handleSubmitComment() {
+    const postId = document.getElementById('submit-comment-btn').dataset.postId;
+    const content = document.getElementById('comment-input').value.trim();
+    if(!content) return;
+    await gasCall('saveComment', { postId, commenterName: '익명', affiliation: '방문자', commentContent: content }, 'POST');
+    document.getElementById('comment-input').value = '';
+    fetchComments(postId);
+}
+
+// 랭킹 불러오기
+async function fetchRanking(filter) {
+    const result = await gasCall('getInterestRanking', { affiliation: filter }, 'GET');
+    if(result.success) {
+        const list = document.getElementById('full-ranking-list');
+        list.innerHTML = result.data.map((item, idx) => `
+            <div class="flex justify-between text-white border-b border-gray-500 py-2">
+                <span class="font-bold w-8">${idx+1}위</span>
+                <span class="flex-1 text-left px-4">${item.Interest}</span>
+                <span class="text-yellow-400">${item.Count}표</span>
+            </div>`).join('');
+    }
+}
+
+window.filterRanking = fetchRanking;
+
+// 눈 내리는 효과
 function createSnow() {
     const container = document.getElementById('snow-container');
-    const snowflakeCount = 50;
-
-    for (let i = 0; i < snowflakeCount; i++) {
+    for (let i = 0; i < 50; i++) {
         const flake = document.createElement('div');
         flake.classList.add('snowflake');
-        
-        // 랜덤 속성 부여
-        const left = Math.random() * 100;
-        const duration = Math.random() * 3 + 2; // 2~5초
-        const delay = Math.random() * 2;
-        const size = Math.random() * 4 + 3; // 3~7px
-
-        flake.style.left = `${left}%`;
-        flake.style.width = `${size}px`;
-        flake.style.height = `${size}px`;
-        flake.style.animationDuration = `${duration}s`;
-        flake.style.animationDelay = `${delay}s`;
-
+        flake.style.left = Math.random() * 100 + '%';
+        flake.style.width = (Math.random() * 4 + 3) + 'px';
+        flake.style.height = flake.style.width;
+        flake.style.animationDuration = (Math.random() * 10 + 10) + 's'; 
+        flake.style.animationDelay = Math.random() * 5 + 's';
         container.appendChild(flake);
     }
 }
