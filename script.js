@@ -7,10 +7,12 @@ let formData = {
     affiliation: '',
     interests: [],
     theme: '',
-    title: '',   // 추가됨
-    content: ''  // message -> content 로 변경
+    title: '',
+    content: ''
 };
 let postDataCache = [];
+let bgmAudio = null;
+let isBgmPlaying = false;
 
 // === 초기화 ===
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,36 +22,144 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createSnow();
     setupEventListeners();
+    setupBGM(); 
+    setupMenu(); 
+    setupCustomCursor();
+    
+    document.getElementById('menu-toggle').classList.remove('hidden');
 });
 
+function setupCustomCursor() {
+    const cursor = document.getElementById('custom-cursor');
+    const glow = document.getElementById('cursor-glow');
+    
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        if(glow) {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        }
+    });
+    
+    document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%, -50%) scale(0.9)');
+    document.addEventListener('mouseup', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+}
+
+function setupMenu() {
+    const toggleBtn = document.getElementById('menu-toggle');
+    const closeBtn = document.getElementById('menu-close');
+    const overlay = document.getElementById('menu-overlay');
+
+    toggleBtn.addEventListener('click', () => {
+        overlay.classList.remove('hidden');
+        setTimeout(() => {
+            overlay.classList.remove('opacity-0');
+        }, 10);
+    });
+
+    closeBtn.addEventListener('click', () => {
+        closeMenu();
+    });
+}
+
+function closeMenu() {
+    const overlay = document.getElementById('menu-overlay');
+    overlay.classList.add('opacity-0');
+    setTimeout(() => {
+        overlay.classList.add('hidden');
+    }, 300);
+}
+
+window.handleMenuClick = function(page) {
+    if (page === 'my_page' || page === 'tree_board') {
+        alert('준비 중인 페이지입니다.');
+    } else {
+        goToPage(page);
+        closeMenu();
+    }
+};
+
+function setupBGM() {
+    bgmAudio = document.getElementById('bgm');
+    bgmAudio.volume = 0; 
+
+    const toggleBtn = document.getElementById('bgm-toggle');
+    document.body.addEventListener('click', startBgm, { once: true });
+
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        toggleBgm();
+    });
+}
+
+function startBgm() {
+    if (isBgmPlaying) return;
+    bgmAudio.play().then(() => {
+        isBgmPlaying = true;
+        fadeInBgm();
+        updateBgmIcon();
+    }).catch(err => console.log("BGM 자동 재생 차단됨:", err));
+}
+
+function fadeInBgm() {
+    let vol = 0;
+    const interval = setInterval(() => {
+        if (vol < 0.5) { 
+            vol += 0.05;
+            bgmAudio.volume = vol;
+        } else {
+            clearInterval(interval);
+        }
+    }, 200);
+}
+
+function toggleBgm() {
+    if (bgmAudio.paused) {
+        bgmAudio.play();
+        isBgmPlaying = true;
+    } else {
+        bgmAudio.pause();
+        isBgmPlaying = false;
+    }
+    updateBgmIcon();
+}
+
+function updateBgmIcon() {
+    const btn = document.getElementById('bgm-toggle');
+    if (isBgmPlaying) {
+        btn.classList.add('bg-white/40');
+        btn.classList.remove('bg-white/20');
+        btn.innerHTML = '<i data-lucide="music" class="w-5 h-5"></i>';
+    } else {
+        btn.classList.add('bg-white/20');
+        btn.classList.remove('bg-white/40');
+        btn.innerHTML = '<i data-lucide="mic-off" class="w-5 h-5"></i>'; 
+    }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
 function setupEventListeners() {
-    // 소속 버튼 클릭
     const affButtons = document.querySelectorAll('.aff-btn');
     affButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // 1. 모든 버튼 초기화 (비활성 상태로)
             affButtons.forEach(b => {
-                // [수정] hover:text-red-800 클래스도 함께 제거해야 함
-                b.classList.remove('bg-red-800', 'text-white', 'border-red-800', 'hover:text-red-800');
-                b.classList.add('bg-white', 'text-slate-600', 'border-slate-300');
+                b.classList.remove('bg-[#6E1A1A]', 'text-white', 'border-[#6E1A1A]');
+                b.classList.add('bg-white', 'text-[#6E1A1A]/80', 'border-[#6E1A1A]/30');
             });
-
-            // 2. 선택된 버튼 활성화
-            btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-300');
-            // [수정] hover:text-red-800 클래스 추가 (마우스 올리면 글자 빨간색)
-            btn.classList.add('bg-red-800', 'text-white', 'border-red-800', 'hover:text-red-800');
+            btn.classList.remove('bg-white', 'text-[#6E1A1A]/80', 'border-[#6E1A1A]/30');
+            btn.classList.add('bg-[#6E1A1A]', 'text-white', 'border-[#6E1A1A]');
             
             formData.affiliation = btn.getAttribute('data-value');
             formData.theme = ''; 
             
-            // 소속이 변경되면 드롭다운 내용 갱신 및 초기화
             renderThemeOptions(formData.affiliation);
-            document.querySelector('#theme-dropdown-btn span').textContent = "테마를 선택해주세요";
-            document.querySelector('#theme-dropdown-btn span').classList.add('text-slate-500');
+            document.querySelector('#theme-dropdown-btn span').textContent = "주제를 선택해주세요";
+            document.querySelector('#theme-dropdown-btn span').classList.add('text-[#6E1A1A]/60');
         });
     });
 
-    // 관심분야 3개 제한
     const interestCheckboxes = document.querySelectorAll('input[name="interests"]');
     interestCheckboxes.forEach(box => {
         box.addEventListener('change', function() {
@@ -61,32 +171,28 @@ function setupEventListeners() {
         });
     });
 
-    // 모달 닫기
     document.getElementById('close-modal-btn').onclick = () => {
         document.getElementById('post-detail-modal').classList.add('hidden');
     };
     
-    // 댓글 전송
     document.getElementById('submit-comment-btn').onclick = handleSubmitComment;
 
-    // 드롭다운 외부 클릭 시 닫기
     document.addEventListener('click', function(e) {
         const dropdown = document.getElementById('theme-dropdown-list');
         const btn = document.getElementById('theme-dropdown-btn');
-        if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+        if (dropdown && !dropdown.contains(e.target) && !btn.contains(e.target)) {
             dropdown.classList.add('hidden');
-            document.getElementById('dropdown-arrow').classList.remove('rotate-180');
+            const arrow = document.getElementById('dropdown-arrow');
+            if(arrow) arrow.classList.remove('rotate-180');
         }
     });
 }
 
-// === 토글 드롭다운 관련 함수 ===
 function toggleThemeDropdown() {
     const dropdown = document.getElementById('theme-dropdown-list');
     const arrow = document.getElementById('dropdown-arrow');
     
     if (dropdown.classList.contains('hidden')) {
-        // 소속을 먼저 선택했는지 확인
         if (!formData.affiliation) {
             alert('소속을 먼저 선택해주세요.');
             return;
@@ -101,33 +207,26 @@ function toggleThemeDropdown() {
 
 function selectTheme(themeValue) {
     formData.theme = themeValue;
-    
-    // 버튼 텍스트 업데이트
     const btnSpan = document.querySelector('#theme-dropdown-btn span');
     btnSpan.textContent = themeValue;
-    btnSpan.classList.remove('text-slate-500');
-    btnSpan.classList.add('text-slate-800', 'font-bold');
-    
-    // 드롭다운 닫기
+    btnSpan.classList.remove('text-[#6E1A1A]/60'); 
+    btnSpan.classList.add('text-[#6E1A1A]', 'font-bold'); 
     toggleThemeDropdown();
 }
 
-// 테마 옵션 렌더링 (드롭다운 아이템 생성)
 function renderThemeOptions(affiliation) {
     const container = document.getElementById('theme-dropdown-list');
     container.innerHTML = ''; 
-    let themes = (affiliation === '교수님') ? ['응원', '조언'] : ['올해의 추억', '현재의 고민', '미래를 위한 다짐'];
-    
+    let themes = (affiliation === '교수님') ? ['응원', '조언'] : ['올해의 추억', '현재의 고민', '미래의 다짐'];
     themes.forEach(theme => {
         const div = document.createElement('div');
-        div.className = 'px-4 py-2 hover:bg-slate-100 cursor-pointer text-sm text-slate-700 border-b border-slate-100 last:border-0';
+        div.className = 'px-4 py-2 hover:bg-[#6E1A1A]/10 cursor-pointer text-sm text-[#6E1A1A] border-b border-[#6E1A1A]/10 last:border-0';
         div.textContent = theme;
         div.onclick = () => selectTheme(theme);
         container.appendChild(div);
     });
 }
 
-// === API 호출 함수 ===
 async function gasCall(action, data = {}, method = 'POST') {
     document.getElementById('loading-overlay').classList.remove('hidden');
     try {
@@ -148,7 +247,6 @@ async function gasCall(action, data = {}, method = 'POST') {
     }
 }
 
-// === 페이지 이동 및 로직 ===
 function goToPage(pageId) {
     document.querySelectorAll('.page-section').forEach(el => {
         el.classList.remove('active');
@@ -158,10 +256,16 @@ function goToPage(pageId) {
     target.style.display = 'flex';
     setTimeout(() => target.classList.add('active'), 10);
 
+    const menuBtn = document.getElementById('menu-toggle');
+    if (pageId === 'main') {
+        menuBtn.classList.remove('hidden');
+    } else {
+        menuBtn.classList.add('hidden');
+    }
+
     if (pageId === 'share_list') fetchPostList();
     if (pageId === 'ranking') fetchRanking('');
     
-    // 애니메이션 페이지 초기화 (다시 작성할 때를 대비)
     if (pageId !== 'animation') {
         const openEnv = document.getElementById('envelope-open');
         const closedEnv = document.getElementById('envelope-closed');
@@ -173,10 +277,8 @@ function goToPage(pageId) {
     }
 }
 
-// 공통 질문 -> 학년 질문 이동
 function validateAndGoToGrade() {
     formData.name = document.getElementById('input-name').value || "익명";
-    
     const checkedInterests = document.querySelectorAll('input[name="interests"]:checked');
     formData.interests = Array.from(checkedInterests).map(cb => cb.value);
 
@@ -197,7 +299,6 @@ function validateAndGoToGrade() {
     goToPage('grade');
 }
 
-// 최종 제출 (애니메이션 적용)
 async function submitSurvey() {
     const title = document.getElementById('post-title').value;
     const content = document.getElementById('post-content').value;
@@ -220,31 +321,23 @@ async function submitSurvey() {
 
     if (result.success) {
         document.getElementById('final-message-preview').textContent = content;
-        
         goToPage('animation');
-
-        // 1. 편지 들어가기 (0.1초 후 시작)
         setTimeout(() => {
             document.getElementById('loading-text').textContent = "트리에 메시지가 걸렸어요!";
             document.getElementById('animating-paper').classList.add('slide-into-envelope');
-        }, 100);
-
-        // 2. 봉투 닫기 (1.6초 후 - 편지가 다 들어간 뒤)
+        }, 800);
         setTimeout(() => {
-            document.getElementById('envelope-open').classList.add('opacity-0'); // 열린 봉투 숨기기
-            document.getElementById('envelope-closed').classList.remove('opacity-0'); // 닫힌 봉투 보이기
+            document.getElementById('envelope-open').classList.add('opacity-0'); 
+            document.getElementById('envelope-closed').classList.remove('opacity-0'); 
         }, 1600);
-
-        // 3. 목록으로 이동 (3.5초 후)
         setTimeout(() => {
             goToPage('share_list');
-        }, 3500);
+        }, 3000);
     } else {
         alert('저장에 실패했습니다: ' + result.message);
     }
 }
 
-// 목록 불러오기
 async function fetchPostList() {
     const listArea = document.getElementById('post-list-area');
     listArea.innerHTML = '<p class="text-center text-white">로딩 중...</p>';
@@ -264,7 +357,6 @@ async function fetchPostList() {
     }
 }
 
-// 상세 보기
 function showPostDetail(postId) {
     const post = postDataCache.find(p => String(p.ID) === String(postId));
     if (!post) return;
@@ -299,7 +391,6 @@ async function handleSubmitComment() {
     fetchComments(postId);
 }
 
-// 랭킹 불러오기
 async function fetchRanking(filter) {
     const result = await gasCall('getInterestRanking', { affiliation: filter }, 'GET');
     if(result.success) {
@@ -315,7 +406,6 @@ async function fetchRanking(filter) {
 
 window.filterRanking = fetchRanking;
 
-// 눈 내리는 효과
 function createSnow() {
     const container = document.getElementById('snow-container');
     for (let i = 0; i < 50; i++) {

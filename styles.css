@@ -1,6 +1,14 @@
 /* === 기본 설정 === */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
 
+/* [수정 4] 학년 질문 페이지용 폰트 정의 */
+@font-face {
+    font-family: 'SchoolSafeLittleOne';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimKkokkomaR.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
 body {
     font-family: 'Noto Sans KR', sans-serif;
     background-color: #0f172a;
@@ -8,10 +16,53 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    cursor: none; 
 }
 
-.font-tangerine {
-    font-family: 'Tangerine', cursive;
+button, input, textarea, .select-option-text, .interest-item, a, i, label {
+    cursor: none;
+}
+
+/* [수정 3] 커서 수정: 불투명도 50% 흰색 채움 (이미지 제거) */
+#custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5); /* 흰색 50% 불투명 */
+    border: 1px solid rgba(255, 255, 255, 0.8); 
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5); 
+    mix-blend-mode: difference; 
+}
+
+body:hover #custom-cursor {
+    opacity: 1;
+}
+
+button:hover ~ #custom-cursor, 
+a:hover ~ #custom-cursor, 
+input:hover ~ #custom-cursor {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+/* [수정 2] 타이틀 폰트 클래스 */
+.font-title {
+    font-family: 'Beau Rivage', cursive;
+}
+
+/* [수정 4] 학년 질문 페이지용 폰트 클래스 */
+.font-school {
+    font-family: 'SchoolSafeLittleOne', sans-serif;
+}
+
+.font-gamja {
+    font-family: 'Gamja Flower', cursive;
 }
 
 .snowflake {
@@ -39,7 +90,7 @@ body {
     height: 100%;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
@@ -67,7 +118,7 @@ body {
 
 .lined-textarea {
     line-height: 2rem;
-    background-image: linear-gradient(transparent 1.9rem, #e2e8f0 1.9rem);
+    background-image: linear-gradient(transparent 1.9rem, #6E1A1A 1.9rem, #6E1A1A 1.95rem, transparent 1.95rem);
     background-size: 100% 2rem;
     background-attachment: local;
     resize: none;
@@ -76,17 +127,17 @@ body {
     width: 100%;
     background-color: transparent;
     font-size: 0.95rem;
-    color: #334155;
+    color: #6E1A1A;
 }
 
 .slide-into-envelope {
-    transform: translate(-50%, 40%) scale(0.8) !important;
+    transform: translate(-50%, 40%) scale(0.5) !important;
     opacity: 0 !important;
     top: 1rem !important;
 }
 
 input[type="checkbox"]:checked, input[type="radio"]:checked {
-    accent-color: #991b1b;
+    accent-color: #6E1A1A;
 }
 
 .loading-overlay {
@@ -97,7 +148,7 @@ input[type="checkbox"]:checked, input[type="radio"]:checked {
 }
 
 .list-item {
-    cursor: pointer;
+    cursor: none;
     padding: 15px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: background-color 0.2s;
