@@ -26,9 +26,16 @@ body {
   width: 15px;
   height: 15px;
   border-radius: 50%;
+
+  /* 배경: 훨씬 더 하얀색에 가까운 아주 연한 크림색 + 불투명도 높임 */
   background-color: rgba(255, 252, 235, 0.8);
+
+  /* 외곽선 제거 */
   border: none;
+
+  /* 빛 번짐: 너무 노랗지 않게, 밝은 레몬색으로 은은하게 변경 */
   box-shadow: 0 0 15px 4px rgba(255, 230, 150, 0.5);
+
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
@@ -36,17 +43,20 @@ body {
   backdrop-filter: blur(1px);
 }
 
+/* 편지지 위에서 어두워지는 커서 스타일 */
 #custom-cursor.cursor-dark {
   background-color: rgba(60, 40, 40, 0.8) !important;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) !important;
 }
 
+/* 클릭/호버 시 밝게 빛나는 효과 */
 #custom-cursor.cursor-bright {
   background-color: rgba(255, 255, 200, 0.9) !important;
   box-shadow: 0 0 20px 8px rgba(255, 215, 0, 0.7) !important;
   transform: translate(-50%, -50%) scale(1.3);
 }
 
+/* 일반 버튼/인풋 위에 올라갔을 때 커서 확대 */
 button:hover ~ #custom-cursor,
 a:hover ~ #custom-cursor,
 input:hover ~ #custom-cursor,
@@ -56,6 +66,7 @@ input:hover ~ #custom-cursor,
   background-color: rgba(255, 250, 220, 0.6);
 }
 
+/* 어두운 영역 안에서 버튼 위에 올라갔을 때 처리 */
 .dark-cursor-area button:hover ~ #custom-cursor,
 .dark-cursor-area input:hover ~ #custom-cursor {
   background-color: rgba(60, 40, 40, 0.7) !important;
@@ -71,8 +82,7 @@ input:hover ~ #custom-cursor,
 .font-bunga {
   font-family: "Bunga Zivilia", sans-serif;
 }
-
-/* 눈송이 스타일 */
+/* 눈송이 기본 스타일 */
 .snowflake {
   position: absolute;
   top: -10px;
@@ -80,21 +90,37 @@ input:hover ~ #custom-cursor,
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
+
+  /* 부드러운 느낌을 위해 살짝 블러 처리 */
   filter: blur(0.5px);
+
+  /* 떨어지는 애니메이션 + 좌우로 흔들리는 애니메이션 동시 적용 */
   animation-name: fall, sway;
   animation-timing-function: linear, ease-in-out;
   animation-iteration-count: infinite, infinite;
 }
 
+/* 아래로 떨어지는 동작 */
 @keyframes fall {
-  0% { top: -10vh; }
-  100% { top: 100vh; }
+  0% {
+    top: -10vh;
+  }
+  100% {
+    top: 100vh;
+  }
 }
 
+/* 좌우로 살랑살랑 흔들리는 동작 */
 @keyframes sway {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(15px); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15px); /* 흔들리는 폭 */
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .page-section {
@@ -206,6 +232,7 @@ input:hover ~ #custom-cursor,
   max-width: 620px !important;
 }
 
+/* Share 페이지 리스트 아이템 */
 .share-list-item {
   cursor: none;
   padding: 15px 20px;
@@ -282,9 +309,16 @@ input:hover ~ #custom-cursor,
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   background-size: 85%;
 }
-.rank-1 { order: 2; margin-bottom: 30px; }
-.rank-2 { order: 1; }
-.rank-3 { order: 3; }
+.rank-1 {
+  order: 2;
+  margin-bottom: 30px;
+}
+.rank-2 {
+  order: 1;
+}
+.rank-3 {
+  order: 3;
+}
 .rank-badge {
   position: absolute;
   top: 0;
@@ -346,6 +380,7 @@ input:hover ~ #custom-cursor,
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+/* === [수정됨] 랭킹 1,2,3위 모두 하단 선(border) 강제 적용 === */
 #top-ranking .rank-list-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
@@ -381,21 +416,27 @@ input:hover ~ #custom-cursor,
   font-weight: bold;
 }
 
-/* 랭킹 툴팁 */
+/* === [수정됨] 랭킹 페이지 '기타' 호버 시 툴팁 스타일 === */
 .rank-tooltip {
   visibility: hidden;
   position: absolute;
-  bottom: 80%;
+  bottom: 80%; /* 위쪽에 표시 */
   left: 50%;
   transform: translateX(-50%) translateY(10px);
+
+  /* 디자인 변경: 남색 배경, 금색 테두리 */
   background: #080f2b;
   color: white;
   border: 1px solid #f5b400;
+
   padding: 10px 20px;
-  border-radius: 999px;
+  border-radius: 999px; /* 알약 모양 */
+
+  /* 내용에 따라 늘어나게 설정 */
   width: max-content;
   max-width: 400px;
   white-space: nowrap;
+
   font-size: 0.85rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   z-index: 100;
@@ -404,6 +445,7 @@ input:hover ~ #custom-cursor,
   pointer-events: none;
   text-align: center;
 }
+
 .rank-list-item:hover .rank-tooltip {
   visibility: visible;
   opacity: 1;
@@ -741,7 +783,8 @@ label,
 .rank-filter-btn {
   cursor: none;
 }
-
+/* Tree 페이지 전용 움직이는 배경 */
+/* Tree 페이지 전용 움직이는 배경 (새벽 감성: 네이비 -> 보라 -> 핑크) */
 /* 1. 정적인 밤하늘 배경 (움직임 없음) */
 .static-night-bg {
   position: absolute;
@@ -749,6 +792,13 @@ label,
   width: 100%;
   height: 100%;
   z-index: 0;
+
+  /* 사진의 색감 재현: 
+       0%  : #02040a (완전한 암흑/우주)
+       40% : #0f1c3f (짙은 밤하늘색)
+       80% : #465f8f (새벽녘 푸른빛)
+       100%: #d49ba8 (지평선의 은은한 핑크빛) 
+    */
   background: linear-gradient(
     to bottom,
     #02040a 0%,
@@ -772,16 +822,23 @@ label,
   background-color: white;
   border-radius: 50%;
   opacity: 0.8;
-  box-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.8); /* 별이 살짝 빛나는 느낌 */
+
+  /* 아주 은은하게 반짝이는 효과 (선택사항) */
   animation: twinkle 3s infinite ease-in-out alternate;
 }
 
 @keyframes twinkle {
-  0% { opacity: 0.3; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1.2); }
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
-
-/* 트리 꼭대기 별 */
+/* === [수정됨] 트리 꼭대기 별 (평소엔 숨김, 조건 만족 시 천천히 등장) === */
 .tree-top-star {
   position: absolute;
   top: 20px;
@@ -795,60 +852,125 @@ label,
   z-index: 100;
   pointer-events: none;
   filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+
+  /* [중요] 기본적으로 투명하게 설정 (안 보임) */
   opacity: 0;
+  /* 3초 동안 천천히 나타나도록 설정 */
   transition: opacity 3s ease-in-out;
 }
+
+/* 이 클래스가 붙으면 별이 보임 */
 .tree-top-star.show-star {
   opacity: 1;
 }
 
+/* 별 조각 스타일 (디자인 유지) */
 .star-piece {
   position: absolute;
   width: 30%;
   aspect-ratio: 1;
-  background-color: #fffadc;
+  background-color: #fffadc; /* 따뜻한 크림색 유지 */
+
+  /* 별 모양 잘라내기 유지 */
   clip-path: polygon(
-    50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
   );
+
   animation: starRotate 12s infinite ease;
 }
-.piece2 { width: 35%; animation-delay: 2s; opacity: 0.8; }
-.piece3 { width: 40%; animation-delay: 3s; opacity: 0.6; }
-.piece4 { width: 45%; animation-delay: 4s; opacity: 0.4; }
-.piece5 { width: 50%; animation-delay: 5s; opacity: 0.2; }
+
+/* [리듬 조절] 전체 속도가 느려진 만큼, 엇박자 간격도 넓혀서 여유롭게 만듭니다 */
+.piece2 {
+  width: 35%;
+  animation-delay: 2s; /* 기존 1s -> 2s */
+  opacity: 0.8;
+}
+.piece3 {
+  width: 40%;
+  animation-delay: 3s; /* 기존 1.5s -> 3s */
+  opacity: 0.6;
+}
+.piece4 {
+  width: 45%;
+  animation-delay: 4s; /* 기존 2s -> 4s */
+  opacity: 0.4;
+}
+.piece5 {
+  width: 50%;
+  animation-delay: 5s; /* 기존 2.5s -> 5s */
+  opacity: 0.2;
+}
 
 @keyframes starRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .mobile-br {
   display: none;
 }
-
 /* =========================================================
-   [모바일 화면 스타일 & 터치 설정]
+ 여기부터 모바일 상세 조절
+   ========================================================= */
+/* =========================================================
+  /* =========================================================
+   [2024-11-29 최종_완결_피드백반영] 
+   1. 랭크/쉐어/레코드 상향조정
+   2. 설문 편지지 이미지 복구
+   3. 오너먼트 한화면 맞춤 & 스크롤
+   4. 트리 눈 위치 조정
+   5. 메인 타이틀 상향
    ========================================================= */
 
-/* 1. 터치 디바이스(모바일)에서 커서 숨기기 */
-@media (hover: none) and (pointer: coarse), (max-width: 768px) {
+/* 1. 터치 디바이스 커서 숨김 */
+@media (hover: none) and (pointer: coarse) {
   #custom-cursor,
   #cursor-glow {
-    display: none !important; /* 커서 요소 숨김 */
+    display: none !important;
   }
   * {
-    cursor: auto !important; /* 기본 시스템 터치 동작 복구 */
+    cursor: auto !important;
   }
 }
 
-/* 2. 모바일 레이아웃 및 스크롤 제어 */
+/* 2. [필수] 배경색 및 스크롤 방지 */
+html {
+  background-color: #0f172a !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+body {
+  background-color: #0f172a !important;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* 3. 모바일 화면 스타일 */
 @media (max-width: 768px) {
-  /* [필수] 배경색 및 전체 스크롤 방지 */
-  html, body {
-    background-color: #0f172a !important;
-    height: 100% !important;
-    overflow: hidden !important; /* 전체 화면 스크롤 절대 금지 */
-    position: fixed;
-    width: 100%;
+  /* [공통] 폰트/버튼 크기 */
+  button,
+  .nav-round-btn,
+  .grade-select-btn {
+    padding: 6px 12px !important;
+    font-size: 0.8rem !important;
   }
 
   /* [배경화면 꽉 채우기] */
@@ -860,10 +982,10 @@ label,
     height: 100dvh !important;
     padding-top: 0 !important;
     z-index: 10;
-    overflow: hidden !important; /* 섹션 자체도 스크롤 금지 */
+    overflow: hidden !important;
   }
 
-  /* 배경 이미지 */
+  /* 배경 이미지 (가장 뒤로 보냄) */
   .page-section > img.absolute,
   #page-main > img,
   .static-night-bg {
@@ -873,17 +995,20 @@ label,
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
-    z-index: -1 !important;
-  }
-  
-  /* 편지지용 이미지 z-index 복구 */
-  #page-common img.absolute,
-  #page-grade img.absolute {
-    z-index: 0 !important;
+    z-index: -1 !important; /* 제일 뒤로 */
   }
 
-  /* [메인 페이지] 타이틀 위치 조정 */
+  /* ▼▼▼ [수정 2] 설문 페이지 편지지 이미지 복구 ▼▼▼ */
+  /* 배경용 이미지가 아닌 컨텐츠용 이미지는 z-index를 복구함 */
+  #page-common img.absolute,
+  #page-grade img.absolute {
+    z-index: 0 !important; /* 다시 보이게 설정 */
+  }
+  /* ▲▲▲ ----------------------------------------- ▲▲▲ */
+
+  /* ▼▼▼ [수정 5] 메인 페이지: 타이틀 올리기 (버튼은 유지) ▼▼▼ */
   #page-main > div.relative.z-20 {
+    /* 전체를 위로 15px 더 올림 (기존 30px -> 15px) */
     margin-top: calc(-120px + env(safe-area-inset-top)) !important;
   }
   #page-main h1 {
@@ -895,78 +1020,49 @@ label,
     font-size: 0.9rem !important;
     margin-bottom: 30px !important;
   }
+
+  /* 버튼 마진을 늘려서 위치 유지 (전체가 올라갔으니 버튼은 내려야 제자리) */
   #page-main button {
     padding: 15px 35px !important;
     font-size: 1.1rem !important;
     border-radius: 999px !important;
-    margin-top: 50px !important;
+    margin-top: 50px !important; /* 20px -> 35px (+15px) */
   }
+  /* ▲▲▲ ---------------------------------------------------- ▲▲▲ */
 
-  /* [중요 수정] 공통/학년 질문 페이지 스크롤 제어 
-     - 기존: overflow-y: auto (전체 스크롤)
-     - 변경: overflow: hidden (전체 스크롤 막음) -> 내부 div만 스크롤 되게 함
-  */
-  #page-common,
-  #page-grade {
-    overflow: hidden !important; /* 바깥 스크롤 막기 */
-    display: flex !important;
-    align-items: center !important; /* 세로 중앙 정렬 */
-    justify-content: center !important; /* 가로 중앙 정렬 */
-    padding-top: 0 !important; /* 중앙 정렬을 위해 상단 패딩 제거 */
-  }
-
-  /* 편지지 컨테이너 크기 잡아주기 */
+  /* [글쓰기 페이지] */
   #page-common .relative.bg-\[\#fdfdfd\],
   #page-grade .relative.bg-\[\#fdfdfd\] {
     width: 90% !important;
-    max-height: 85vh !important; /* 화면 높이의 85%까지만 차지 */
     margin: 0 auto;
-    aspect-ratio: auto !important; /* 비율 강제 해제 (내용에 맞춤) */
-    display: flex;
-    flex-direction: column;
   }
-
-  /* [핵심] 편지지 내부 스크롤 영역 
-     - 여기서 overflow-y: auto가 작동하여 '종이 안에서만' 스크롤 됨
-  */
-  #page-common .absolute.inset-0.overflow-y-auto,
-  #page-grade .absolute.inset-0.overflow-y-auto {
-    position: relative !important; /* absolute 해제하여 높이 인식 */
-    height: 100% !important;
-    max-height: 60vh !important; /* 내부 스크롤 가능한 최대 높이 지정 */
+  #page-common,
+  #page-grade {
+    /* 스크롤 가능하게 변경 */
     overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch; /* 부드러운 스크롤 */
-    padding-bottom: 20px !important; /* 하단 잘림 방지 */
+    -webkit-overflow-scrolling: touch;
+    padding-top: calc(30px + env(safe-area-inset-top)) !important;
   }
-  
-  /* 편지지 배경 이미지 (종이 질감) */
-  #page-common .relative.bg-\[\#fdfdfd\] > img,
-  #page-grade .relative.bg-\[\#fdfdfd\] > img {
-    position: absolute !important;
-    inset: 0 !important;
-    height: 100% !important;
-    z-index: 0 !important;
-  }
-  
-  /* 콘텐츠 래퍼 */
-  #page-common .p-8, 
+  #page-common .p-8,
   #page-grade .p-8 {
-     padding: 2rem 1.5rem !important;
-     z-index: 10 !important; /* 글자가 종이 위에 오도록 */
+    padding: 3.5rem 2rem !important;
   }
-
-  /* [소속 버튼] */
   #affiliation-group {
     display: flex !important;
     flex-wrap: nowrap !important;
+    justify-content: space-between !important;
     gap: 4px !important;
     width: 100% !important;
   }
   #affiliation-group .aff-btn {
     flex: 1 !important;
-    padding: 8px 0 !important;
-    font-size: 0.75rem !important;
+    padding: 6px 0 !important;
+    font-size: 0.7rem !important;
+    min-width: 0 !important;
     white-space: nowrap !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   /* [편지 애니메이션] */
@@ -975,36 +1071,66 @@ label,
     margin: 0 auto !important;
   }
 
-  /* [오너먼트 페이지] */
+  /* ▼▼▼ [수정 3] 오너먼트 페이지: 한 화면 맞춤 & 스크롤 ▼▼▼ */
   #page-ornament {
-    overflow-y: auto !important;
+    overflow-y: auto !important; /* 스크롤 허용 */
     -webkit-overflow-scrolling: touch;
   }
+
   #page-ornament .relative.z-20 {
+    /* 상단 여백 유지 */
     padding-top: calc(20px + env(safe-area-inset-top)) !important;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100%;
-    padding-bottom: 30px;
+    min-height: 100%; /* 스크롤 영역 확보 */
+    padding-bottom: 30px; /* 하단 여백 추가 */
   }
-  #categoryPill { order: 1; margin-bottom: 10px !important; }
-  #page-ornament .title { order: 2; font-size: 1rem !important; margin-bottom: 20px !important; }
-  .ornament-main-wrapper { order: 3; width: 150px !important; height: 150px !important; margin-bottom: 40px !important; }
-  .panel { order: 4; width: 95% !important; padding: 20px !important; }
-  .thumb-row { gap: 12px !important; }
-  .thumb { width: 90px !important; height: 90px !important; border-width: 3px !important; }
+  #categoryPill {
+    order: 1;
+    margin-bottom: 10px !important;
+  } /* 간격 축소 */
+  #page-ornament .title {
+    order: 2;
+    font-size: 1rem !important;
+    margin-bottom: 20px !important;
+  } /* 간격 축소 */
+
+  /* 메인 오너먼트 크기 축소 (한 화면에 넣기 위함) */
+  .ornament-main-wrapper {
+    order: 3;
+    width: 150px !important;
+    height: 150px !important; /* 220px -> 180px */
+    margin-bottom: 40px !important;
+  }
+
+  .panel {
+    order: 4;
+    width: 95% !important;
+    padding: 20px !important;
+  }
+  .thumb-row {
+    gap: 12px !important;
+  }
+  .thumb {
+    width: 90px !important;
+    height: 90px !important;
+    border-width: 3px !important;
+  }
+  /* ▲▲▲ ---------------------------------------------------- ▲▲▲ */
 
   /* [트리 페이지] */
   #page-tree {
     position: fixed !important;
-    overflow: hidden !important;
+    overflow: hidden !important; /* 스크롤 절대 금지 */
     width: 100% !important;
     height: 100% !important;
   }
+
   #page-tree .absolute.top-5.right-5 {
     top: calc(15px + env(safe-area-inset-top)) !important;
     left: 50% !important;
+    right: auto !important;
     transform: translateX(-50%);
     width: 100%;
     display: flex;
@@ -1019,56 +1145,385 @@ label,
     width: 90% !important;
     z-index: 70;
   }
-  .search { width: 100%; position: relative; }
-  .search__input { width: 100% !important; height: 40px; padding-left: 15px !important; padding-right: 45px !important; }
-  .search__button { position: absolute !important; right: 10px !important; top: 50% !important; transform: translateY(-50%); }
-  
+  .search {
+    width: 100%;
+    position: relative;
+  }
+  .search__input {
+    width: 100% !important;
+    height: 40px;
+    margin: 0 !important;
+    padding-left: 15px !important;
+    padding-right: 45px !important;
+  }
+  .search__button {
+    position: absolute !important;
+    right: 10px !important;
+    left: auto !important;
+    top: 50% !important;
+    transform: translateY(-50%);
+    margin: 0 !important;
+    padding: 0;
+  }
+
+  /* 학년 버튼 */
   #grade-selector-container {
-    bottom: 80px !important;
     top: auto !important;
+    bottom: 80px !important;
+    flex-wrap: wrap;
+    gap: 5px;
+    left: 50% !important;
+    transform: translateX(-50%);
     width: 100%;
     justify-content: center;
-    gap: 5px;
+    z-index: 999 !important;
   }
-  .tree-hint { bottom: 30px !important; width: 90%; font-size: 0.85rem !important; }
-  .snow-ground { bottom: -30px !important; height: 30vh !important; }
-  .slot-marker { font-size: 1.2rem !important; width: 32px !important; height: 32px !important; }
-  .arrow-btn { display: none !important; }
 
-  /* [상세 모달, 랭킹, 쉐어 등 기타 페이지] */
-  #post-detail-modal > div { width: 90% !important; height: 90vh !important; margin-top: calc(20px + env(safe-area-inset-top)) !important; }
-  #post-detail-modal > div > div:first-child { height: 360px !important; margin-top: 50px !important; }
-  #comment-write-area { min-height: 350px; }
-  #ranking-container, #share-list-container, #my-record-container { padding-top: calc(40px + env(safe-area-inset-top)) !important; justify-content: flex-start !important; }
-  .rank-filter-container { padding-left: 20px !important; width: 100% !important; }
-  #top-ranking { padding: 0 40px !important; }
-  #full-ranking-list, #post-list-area, #my-post-list-area { width: 85% !important; }
-  .mobile-br { display: block !important; }
-  #menu-overlay nav button { font-size: 24px !important; }
+  /* 힌트 메시지 */
+  .tree-hint {
+    bottom: 30px !important;
+    z-index: 999 !important;
+    width: 90%;
+    line-height: 1.5;
+    padding: 10px 20px !important;
+    text-align: center;
+    font-size: 0.85rem !important;
+  }
+
+  /* ▼▼▼ [수정 4] 눈 바닥 10px 내리기 ▼▼▼ */
+  .snow-ground {
+    position: fixed !important;
+    bottom: -30px !important; /* 0 -> -10px */
+    left: 0 !important;
+    width: 100% !important;
+    height: 30vh !important;
+    background-color: #dbe4ea;
+    z-index: 2;
+    display: block !important;
+    margin: 0 !important;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .snow-ground img {
+    display: none !important;
+  }
+  /* ▲▲▲ ------------------------------- ▲▲▲ */
+
+  .slot-marker {
+    font-size: 1.2rem !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+    transform: translateX(-5px) !important;
+  }
+  .slot-marker::before {
+    content: none !important;
+    display: none !important;
+  }
+  .slot-marker:hover {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background-color: rgba(239, 71, 80, 0.96) !important;
+    color: white !important;
+  }
+  .arrow-btn {
+    display: none !important;
+  }
+
+  /* [상세 모달] 편지 & 댓글 */
+  #post-detail-modal {
+    padding-top: 0 !important;
+    align-items: flex-start !important;
+  }
+  #post-detail-modal > div {
+    display: block !important;
+    width: 90% !important;
+    height: 90vh !important;
+    overflow-y: auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-top: calc(20px + env(safe-area-inset-top)) !important;
+  }
+  #post-detail-modal > div::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 편지 영역 */
+  #post-detail-modal > div > div:first-child {
+    display: block !important;
+    width: 100% !important;
+    height: 360px !important;
+    min-height: 0 !important;
+    margin-top: 50px !important;
+    background-image: none !important;
+    background-color: #fffef2 !important;
+    border: 1px solid #d45d5d !important;
+    outline: 2px dotted #d45d5d !important;
+    outline-offset: -10px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4) !important;
+    border-radius: 5px !important;
+    position: relative !important;
+    z-index: 10 !important;
+    padding: 15px 25px 15px 25px !important;
+    margin-bottom: 0 !important;
+  }
+  .lined-content {
+    font-size: 0.95rem !important;
+    line-height: 1.8rem !important;
+    background-image: linear-gradient(
+      transparent 1.75rem,
+      rgba(170, 50, 50, 0.15) 1.75rem
+    ) !important;
+    background-size: 100% 1.8rem !important;
+    padding-top: 5px !important;
+  }
+  #detail-title {
+    margin-top: 0 !important;
+    margin-bottom: 2px !important;
+    font-size: 1.1rem !important;
+    border-bottom: none !important;
+    text-align: center !important;
+    color: #8a2a2a !important;
+  }
+  #detail-id {
+    text-align: center !important;
+    margin-bottom: 5px !important;
+    font-size: 0.8rem !important;
+    color: #a05050 !important;
+  }
+  .post-content-scroll {
+    height: 260px !important;
+    margin-top: 5px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .post-content-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 댓글 영역 */
+  #comment-write-area {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 350px;
+    border-radius: 15px !important;
+    background-color: #1e233c !important;
+    margin-top: 20px !important;
+    position: relative !important;
+    z-index: 5 !important;
+    padding-top: 20px !important;
+    padding-bottom: 50px !important;
+  }
+  #comments-list {
+    height: 180px !important;
+    overflow-y: auto;
+    padding: 10px 25px !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  #comments-list::-webkit-scrollbar {
+    display: none;
+  }
+  #comment-write-area > div:last-child {
+    padding: 15px 25px !important;
+  }
+  #comment-input {
+    height: 40px !important;
+    font-size: 0.9rem !important;
+    resize: none !important;
+    overflow-y: auto !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  #comment-input::-webkit-scrollbar {
+    display: none;
+  }
+  #submit-comment-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px !important;
+  }
+
+  /* ▼▼▼ [수정 1] 랭크/쉐어/레코드: 10px 더 위로 올림 ▼▼▼ */
+  #ranking-container,
+  #share-list-container,
+  #my-record-container {
+    /* 기존 50px -> 40px (+env) */
+    padding-top: calc(40px + env(safe-area-inset-top)) !important;
+    justify-content: flex-start !important;
+  }
+  /* ▲▲▲ --------------------------------------------- ▲▲▲ */
+
+  .rank-filter-container {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    padding-left: 20px !important;
+    width: 100% !important;
+    min-height: 60px !important;
+    margin-bottom: 15px !important;
+    z-index: 1000 !important;
+    position: relative !important;
+  }
+  .rank-filter-container::-webkit-scrollbar {
+    display: none;
+  }
+  .rank-filter-btn {
+    white-space: nowrap !important;
+    margin-right: 10px !important;
+    flex-shrink: 0;
+    font-size: 0.9rem !important;
+    font-weight: bold !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    padding-bottom: 5px !important;
+    border-bottom: 2px solid transparent !important;
+  }
+  .rank-filter-btn.active-filter {
+    color: #ffffff !important;
+    border-bottom: 2px solid #ffffff !important;
+  }
+
+  #top-ranking {
+    padding: 0 40px !important;
+    gap: 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 10px !important;
+  }
+  .rank-circle-img {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .rank-badge {
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 0.8rem !important;
+    top: -5px !important;
+    left: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rank-1 .rank-badge {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 0.9rem !important;
+  }
+  .rank-label {
+    font-size: 0.75rem !important;
+    padding: 4px 10px !important;
+    margin-top: -10px !important;
+    line-height: 1.1 !important;
+  }
+
+  #full-ranking-list {
+    width: 85% !important;
+    margin: 30px auto 0 auto !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  #full-ranking-list::-webkit-scrollbar {
+    display: none;
+  }
+  .rank-list-item {
+    padding: 12px 5px !important;
+  }
+  .rank-num {
+    font-size: 1rem !important;
+    width: 30px !important;
+  }
+  .rank-name {
+    font-size: 0.9rem !important;
+  }
+  .rank-votes {
+    font-size: 0.8rem !important;
+  }
+
+  #post-list-area,
+  #my-post-list-area {
+    width: 85% !important;
+    margin: 0 auto !important;
+  }
+  #share-list-container h2,
+  #ranking-container h2,
+  #my-record-container h2 {
+    font-size: 3rem !important;
+    margin-bottom: 10px !important;
+  }
+  .share-list-item p.text-xl {
+    font-size: 1.1rem !important;
+  }
+  .share-list-item p.text-sm {
+    font-size: 0.8rem !important;
+  }
+  #my-record-container .max-w-md {
+    width: 85% !important;
+    gap: 5px !important;
+    margin-bottom: 20px !important;
+  }
+  #my-id-input {
+    padding: 8px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .mobile-br {
+    display: block !important;
+  }
+
+  /* 햄버거 메뉴 글씨 2배 확대 */
+  #menu-overlay nav button {
+    font-size: 24px !important;
+    line-height: 1.5 !important;
+    padding: 10px 0 !important;
+    font-weight: bold !important;
+  }
 }
 
-/* [이벤트 툴팁 스타일] */
+/* [이벤트 툴팁 스타일 - 수정됨] */
 .tooltip-container {
-  position: relative; 
+  position: relative; /* 아이콘 기준 */
 }
+
+/* 호버 시 박스 보이기 */
 .tooltip-container:hover .tooltip-box {
   display: block;
   animation: tooltipPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+/* 툴팁 박스를 화면 중앙에 띄움 (편지지 스크롤 영향 안 받음) 
+   모바일/PC 모두 잘 보이도록 설정
+*/
 .tooltip-box {
-  position: fixed !important;
+  position: fixed !important; /* 편지지 탈출 */
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   width: 280px !important;
-  background-color: #fffef2 !important;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
+  background-color: #ffffff !important; /* 편지지 색상과 비슷하게 */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
   z-index: 99999 !important;
 }
+
+/* 툴팁 등장 애니메이션 */
 @keyframes tooltipPop {
-  from { opacity: 0; transform: translate(-50%, -40%) scale(0.9); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  from { 
+    opacity: 0; 
+    transform: translate(-50%, -40%) scale(0.9); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translate(-50%, -50%) scale(1); 
+  }
 }
+
+/* 말풍선 꼬리 제거 (화면 중앙 팝업식이므로 꼬리 불필요) */
 .tooltip-box::before {
   display: none;
 }
