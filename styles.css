@@ -934,14 +934,32 @@ label,
    5. 메인 타이틀 상향
    ========================================================= */
 
-/* 1. 터치 디바이스 커서 숨김 */
-@media (hover: none) and (pointer: coarse) {
+/* 1. 모바일 강제 커서 숨김 (터치 기기이거나, 화면 폭이 768px 이하인 경우 무조건 숨김) */
+@media (hover: none) and (pointer: coarse), (max-width: 768px) {
   #custom-cursor,
-  #cursor-glow {
+  #custom-cursor.cursor-dark,
+  #custom-cursor.cursor-bright {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
   }
+
+  /* 커서가 사라졌으니 시스템 기본 커서 복구 */
   * {
     cursor: auto !important;
+  }
+
+  /* 호버 효과 제거 (모바일에서 터치 후 잔상 방지) */
+  button:hover ~ #custom-cursor,
+  a:hover ~ #custom-cursor,
+  input:hover ~ #custom-cursor,
+  .thumb:hover ~ #custom-cursor,
+  .slot-marker:hover ~ #custom-cursor {
+    display: none !important;
+    transform: none !important;
   }
 }
 
