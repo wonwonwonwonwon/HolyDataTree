@@ -404,11 +404,11 @@ function validateAndGoToGrade() {
   formData.interests = Array.from(document.querySelectorAll('input[name="interests"]:checked')).map((cb) => cb.value);
   
   if (!formData.affiliation || !formData.theme) {
-    alert("소속과 테마를 선택해주세요!");
+    alert("필수 문항을 완료해주세요!");
     return;
   }
   if (formData.interests.length === 0) {
-    alert("관심분야를 최소 1개 선택해주세요.");
+    alert("필수 문항을 완료해주세요!");
     return;
   }
   
