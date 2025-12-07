@@ -51,14 +51,14 @@
       id="bgm-toggle"
       class="fixed bottom-5 right-5 z-[9999] bg-white/20 backdrop-blur-md p-2 rounded-full text-white hover:bg-white/40 transition-all shadow-lg cursor-none pointer-events-auto"
     >
-      <i data-lucide="music" class="w-5 h-5"></i>
+      <i data-lucide="music" class="w-5 Hey-5"></i>
     </button>
 
     <button
       id="menu-toggle"
       class="fixed top-5 left-5 z-[9999] text-white hover:text-yellow-100 transition-colors cursor-none p-2 hidden"
     >
-      <i data-lucide="menu" class="w-8 h-8 drop-shadow-md"></i>
+      <i data-lucide="menu" class="w-8 Hey-8 drop-shadow-md"></i>
     </button>
 
     <div
@@ -69,7 +69,7 @@
         id="menu-close"
         class="absolute top-5 right-5 text-white hover:text-red-400 p-2 cursor-none"
       >
-        <i data-lucide="x" class="w-8 h-8"></i>
+        <i data-lucide="x" class="w-8 Hey-8"></i>
       </button>
       <nav class="flex flex-col gap-8 text-center">
         <button
@@ -116,7 +116,7 @@
         <div
           class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"
         ></div>
-        <p id="loading-msg">데이터 처리 중...</p>
+        <p id="loading-msg">데이터 처리 중…</p>
       </div>
     </div>
     <div
@@ -148,7 +148,7 @@
       class="fixed inset-0 pointer-events-none z-50 overflow-hidden"
     ></div>
 
-   <section
+    <section
       id="page-main"
       class="page-section active justify-center items-center"
     >
@@ -171,26 +171,37 @@
         <p class="text-sm md:text-base mb-6 opacity-90 font-light">
           서로의 감정으로 완성되는 시각디자인과 한 해의 기록
         </p>
-        
-        <button
-          onclick="startNewSurvey()"
-          class="bg-white text-slate-900 px-7 py-3 rounded-full text-sm transition-all transform hover:scale-105 shadow-lg cursor-none hover:bg-yellow-50 hover:shadow-[0_0_20px_rgba(253,224,71,0.6)] duration-300 mt-10"
-        >
-          기록하러 가기
-        </button>
 
-        <div class="absolute w-full flex justify-center left-0" style="bottom: -15vh;">
-            <p 
-              id="participation-stat-text" 
-              class="text-sm md:text-base opacity-90 font-light transition-opacity duration-500 ease-in-out font-['Noto_Sans_KR']"
-              style="min-height: 1.5em; text-shadow: 0 2px 4px rgba(0,0,0,0.5);"
-            >
-              데이터를 불러오는 중...
-            </p>
+        <div class="flex flex-row gap-4 justify-center items-center mt-10">
+          <button
+            onclick="startNewSurvey()"
+            class="bg-white text-slate-900 px-7 py-3 rounded-full text-sm transition-all transform hover:scale-105 shadow-lg cursor-none hover:bg-yellow-50 hover:shadow-[0_0_20px_rgba(253,224,71,0.6)] duration-300 font-bold"
+          >
+            기록하러 가기
+          </button>
+
+          <button
+            onclick="openRandomPopup()"
+            class="bg-[#080f2b] text-white border border-white/20 px-7 py-3 rounded-full text-sm transition-all transform hover:scale-105 shadow-lg cursor-none hover:bg-[#1a234d] hover:shadow-[0_0_20px_rgba(100,100,255,0.4)] duration-300 font-bold"
+          >
+            오너먼트 둘러보기
+          </button>
+        </div>
+        <div
+          class="absolute w-full flex justify-center left-0"
+          style="bottom: -15vh"
+        >
+          <p
+            id="participation-stat-text"
+            class="text-sm md:text-base opacity-90 font-light transition-opacity duration-500 ease-in-out font-['Noto_Sans_KR']"
+            style="min-height: 1.5em; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5)"
+          >
+            데이터를 불러오는 중...
+          </p>
         </div>
       </div>
     </section>
-<section
+    <section
       id="page-common"
       class="page-section justify-center items-center pt-10"
     >
@@ -236,11 +247,41 @@
                 >Q2. 소속을 알려주세요*</label
               >
               <div class="flex flex-wrap gap-1" id="affiliation-group">
-                <button type="button" class="aff-btn flex-1 text-xs py-1" data-value="1학년">1학년</button>
-                <button type="button" class="aff-btn flex-1 text-xs py-1" data-value="2학년">2학년</button>
-                <button type="button" class="aff-btn flex-1 text-xs py-1" data-value="3학년">3학년</button>
-                <button type="button" class="aff-btn flex-1 text-xs py-1" data-value="전공심화">전심</button>
-                <button type="button" class="aff-btn flex-1 text-xs py-1" data-value="교수님">교수님</button>
+                <button
+                  type="button"
+                  class="aff-btn flex-1 text-xs py-1"
+                  data-value="1학년"
+                >
+                  1학년
+                </button>
+                <button
+                  type="button"
+                  class="aff-btn flex-1 text-xs py-1"
+                  data-value="2학년"
+                >
+                  2학년
+                </button>
+                <button
+                  type="button"
+                  class="aff-btn flex-1 text-xs py-1"
+                  data-value="3학년"
+                >
+                  3학년
+                </button>
+                <button
+                  type="button"
+                  class="aff-btn flex-1 text-xs py-1"
+                  data-value="전공심화"
+                >
+                  전심
+                </button>
+                <button
+                  type="button"
+                  class="aff-btn flex-1 text-xs py-1"
+                  data-value="교수님"
+                >
+                  교수님
+                </button>
               </div>
             </div>
 
@@ -251,15 +292,73 @@
               <p class="text-[10px] text-[#6E1A1A]/60 mb-2 font-light">
                 학과 내 진로 경향을 파악할 수 있어요.
               </p>
-              <div class="grid grid-cols-2 gap-x-2 gap-y-1 text-xs text-[#6E1A1A] mt-1">
-                <label class="flex items-center space-x-1 cursor-none"><input type="checkbox" name="interests" value="브랜드 디자인" class="cursor-none accent-[#6E1A1A] scale-90"/><span>브랜드</span></label>
-                <label class="flex items-center space-x-1 cursor-none"><input type="checkbox" name="interests" value="UIUX 디자인" class="cursor-none accent-[#6E1A1A] scale-90"/><span>UI/UX</span></label>
-                <label class="flex items-center space-x-1 cursor-none"><input type="checkbox" name="interests" value="편집 디자인" class="cursor-none accent-[#6E1A1A] scale-90"/><span>편집/출판</span></label>
-                <label class="flex items-center space-x-1 cursor-none"><input type="checkbox" name="interests" value="3D 디자인" class="cursor-none accent-[#6E1A1A] scale-90"/><span>3D/제품</span></label>
-                <label class="flex items-center space-x-1 cursor-none"><input type="checkbox" name="interests" value="영상 디자인" class="cursor-none accent-[#6E1A1A] scale-90"/><span>영상/모션</span></label>
-                <label class="flex items-center space-x-1 cursor-none"><input type="checkbox" name="interests" value="그래픽 디자인" class="cursor-none accent-[#6E1A1A] scale-90"/><span>그래픽/일러</span></label>
-                <label class="flex items-center space-x-1 cursor-none"><input type="checkbox" name="interests" value="레터링 디자인" class="cursor-none accent-[#6E1A1A] scale-90"/><span>레터링</span></label>
-                <label class="flex items-center space-x-1 cursor-none"><input type="checkbox" name="interests" value="기타" class="cursor-none accent-[#6E1A1A] scale-90"/><span>기타</span></label>
+              <div
+                class="grid grid-cols-2 gap-x-2 gap-y-1 text-xs text-[#6E1A1A] mt-1"
+              >
+                <label class="flex items-center space-x-1 cursor-none"
+                  ><input
+                    type="checkbox"
+                    name="interests"
+                    value="브랜드 디자인"
+                    class="cursor-none accent-[#6E1A1A] scale-90"
+                  /><span>브랜드</span></label
+                >
+                <label class="flex items-center space-x-1 cursor-none"
+                  ><input
+                    type="checkbox"
+                    name="interests"
+                    value="UIUX 디자인"
+                    class="cursor-none accent-[#6E1A1A] scale-90"
+                  /><span>UI/UX</span></label
+                >
+                <label class="flex items-center space-x-1 cursor-none"
+                  ><input
+                    type="checkbox"
+                    name="interests"
+                    value="편집 디자인"
+                    class="cursor-none accent-[#6E1A1A] scale-90"
+                  /><span>편집/출판</span></label
+                >
+                <label class="flex items-center space-x-1 cursor-none"
+                  ><input
+                    type="checkbox"
+                    name="interests"
+                    value="3D 디자인"
+                    class="cursor-none accent-[#6E1A1A] scale-90"
+                  /><span>3D/제품</span></label
+                >
+                <label class="flex items-center space-x-1 cursor-none"
+                  ><input
+                    type="checkbox"
+                    name="interests"
+                    value="영상 디자인"
+                    class="cursor-none accent-[#6E1A1A] scale-90"
+                  /><span>영상/모션</span></label
+                >
+                <label class="flex items-center space-x-1 cursor-none"
+                  ><input
+                    type="checkbox"
+                    name="interests"
+                    value="그래픽 디자인"
+                    class="cursor-none accent-[#6E1A1A] scale-90"
+                  /><span>그래픽/일러</span></label
+                >
+                <label class="flex items-center space-x-1 cursor-none"
+                  ><input
+                    type="checkbox"
+                    name="interests"
+                    value="레터링 디자인"
+                    class="cursor-none accent-[#6E1A1A] scale-90"
+                  /><span>레터링</span></label
+                >
+                <label class="flex items-center space-x-1 cursor-none"
+                  ><input
+                    type="checkbox"
+                    name="interests"
+                    value="기타"
+                    class="cursor-none accent-[#6E1A1A] scale-90"
+                  /><span>기타</span></label
+                >
               </div>
             </div>
 
@@ -286,42 +385,67 @@
               ></div>
             </div>
 
-            <div class="mb-4 relative group z-30"> 
+            <div class="mb-4 relative group z-30">
               <div class="flex items-center justify-between mb-1">
-                 <div class="flex items-center">
-                    <label class="block text-[#6E1A1A] font-bold text-sm mr-2">
+                <div class="flex items-center">
+                  <label class="block text-[#6E1A1A] font-bold text-sm mr-2">
                     Q5. 이벤트(선택)
-                    </label>
-                    <div class="relative inline-block tooltip-container">
-                    <i data-lucide="help-circle" class="w-4 h-4 text-[#6E1A1A] cursor-pointer hover:text-red-600"></i>
-                    <div class="tooltip-box hidden fixed p-4 bg-white border-1.5 border-[#6E1A1A] rounded-xl shadow-2xl text-xs text-[#6E1A1A] z-[9999] w-64">
-                        <p class="font-bold mb-2 text-sm border-b border-[#ffffff]/20 pb-1">🎁 이벤트 안내</p>
-                        <p class="leading-relaxed mb-2">열심히 활동해주신 3분께 상품을 드려요!</p>
-                        <ul class="list-disc pl-4 space-y-1 text-[11px]">
+                  </label>
+                  <div class="relative inline-block tooltip-container">
+                    <i
+                      data-lucide="help-circle"
+                      class="w-4 h-4 text-[#6E1A1A] cursor-pointer hover:text-red-600"
+                    ></i>
+                    <div
+                      class="tooltip-box hidden fixed p-4 bg-white border-1.5 border-[#6E1A1A] rounded-xl shadow-2xl text-xs text-[#6E1A1A] z-[9999] w-64"
+                    >
+                      <p
+                        class="font-bold mb-2 text-sm border-b border-[#ffffff]/20 pb-1"
+                      >
+                        🎁 이벤트 안내
+                      </p>
+                      <p class="leading-relaxed mb-2">
+                        열심히 활동해주신 3분께 상품을 드려요!
+                      </p>
+                      <ul class="list-disc pl-4 space-y-1 text-[11px]">
                         <li>댓글 가장 많이 받은 사람</li>
                         <li>댓글을 가장 많이 남긴 사람</li>
                         <li>가장 정성스러운 댓글 작성자</li>
-                        </ul>
+                      </ul>
                     </div>
-                    </div>
-                 </div>
-                 
-                 <label class="flex items-center space-x-1 cursor-pointer">
-                    <input type="checkbox" id="event-join-check" class="accent-[#6E1A1A] cursor-pointer" onchange="toggleEventInputs()">
-                    <span class="text-xs text-[#6E1A1A] font-bold">참가하기</span>
-                 </label>
+                  </div>
+                </div>
+
+                <label class="flex items-center space-x-1 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    id="event-join-check"
+                    class="accent-[#6E1A1A] cursor-pointer"
+                    onchange="toggleEventInputs()"
+                  />
+                  <span class="text-xs text-[#6E1A1A] font-bold">참가하기</span>
+                </label>
               </div>
 
-              <div id="event-inputs" class="hidden pl-2 border-l-2 border-[#6E1A1A]/20 transition-all duration-300 mt-1">
+              <div
+                id="event-inputs"
+                class="hidden pl-2 border-l-2 border-[#6E1A1A]/20 transition-all duration-300 mt-1"
+              >
                 <input
-                    type="tel"
-                    id="input-phone"
-                    placeholder="연락처 (010-0000-0000)"
-                    class="w-full bg-transparent border-b border-[#6E1A1A]/30 focus:border-[#6E1A1A] outline-none py-1 text-sm text-[#6E1A1A] placeholder-[#6E1A1A]/30 mb-1"
-                  />
+                  type="tel"
+                  id="input-phone"
+                  placeholder="연락처 (010-0000-0000)"
+                  class="w-full bg-transparent border-b border-[#6E1A1A]/30 focus:border-[#6E1A1A] outline-none py-1 text-sm text-[#6E1A1A] placeholder-[#6E1A1A]/30 mb-1"
+                />
                 <label class="flex items-center space-x-2 cursor-pointer">
-                  <input type="checkbox" id="consent-check" class="accent-[#6E1A1A] cursor-pointer scale-90">
-                  <span class="text-[10px] text-[#6E1A1A]">개인정보 수집/이용 동의 (필수)</span>
+                  <input
+                    type="checkbox"
+                    id="consent-check"
+                    class="accent-[#6E1A1A] cursor-pointer scale-90"
+                  />
+                  <span class="text-[10px] text-[#6E1A1A]"
+                    >개인정보 수집/이용 동의 (필수)</span
+                  >
                 </label>
               </div>
             </div>
@@ -782,7 +906,67 @@
         <div class="text-sm text-gray-500 mb-4">편지를 수거하는 중이에요!</div>
       </div>
     </div>
+    <div
+      id="random-popup-modal"
+      class="fixed inset-0 z-[9999] hidden justify-center items-center"
+    >
+      <div
+        class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+        onclick="closeRandomPopup()"
+      ></div>
 
+      <div
+        class="relative bg-[#0b0f20] border border-white/10 rounded-2xl p-8 max-w-sm w-[90%] min-h-[550px] flex flex-col items-center justify-center shadow-2xl animate-popup-scale font-['Noto_Sans_KR'] gap-2"
+      >
+        <button
+          onclick="closeRandomPopup()"
+          class="absolute top-4 right-4 text-white/50 hover:text-white transition-colors cursor-none"
+        >
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
+        <div
+          class="w-40 h-40 relative flex items-center justify-center shrink-0"
+        >
+          <div
+            class="absolute inset-0 bg-yellow-400/20 blur-2xl rounded-full"
+          ></div>
+          <img
+            id="random-ornament-img"
+            src=""
+            alt="Random Ornament"
+            class="w-full h-full object-contain relative z-10 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
+          />
+        </div>
+
+        <div class="w-full h-[1px] bg-white/20 my-4"></div>
+
+        <div class="text-center w-full flex-1 flex flex-col justify-center">
+          <h3
+            id="random-post-title"
+            class="text-xl font-bold text-white mb-3 break-keep"
+          >
+            제목
+          </h3>
+          <p
+            id="random-post-content"
+            class="text-sm text-gray-300 mb-4 line-clamp-3 leading-relaxed px-2 break-all"
+          >
+            내용
+          </p>
+          <p class="text-xs text-[#C5A059] font-bold mb-4">
+            From. <span id="random-post-name">닉네임</span>
+          </p>
+        </div>
+
+        <button
+          id="btn-go-to-comment"
+          class="bg-[#C9302C] hover:bg-[#a92522] text-white px-8 py-3 rounded-full text-sm font-bold shadow-lg transition-all w-full cursor-none"
+        >
+          댓글 남기러 가기
+        </button>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

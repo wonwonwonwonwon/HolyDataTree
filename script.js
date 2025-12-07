@@ -1,9 +1,16 @@
 // ▼▼▼ [중요] 배포 후 생성된 새 웹 앱 URL을 아래에 넣으세요 ▼▼▼
-const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxS1I08N5LvnErn3dbpY2mYgFKEPyx64YsrLEQ3b6rda7lqWOo1ioBuudeYpLprWes/exec";
+const GAS_WEB_APP_URL =
+  "https://script.google.com/macros/s/AKfycbxS1I08N5LvnErn3dbpY2mYgFKEPyx64YsrLEQ3b6rda7lqWOo1ioBuudeYpLprWes/exec";
 
 const OFFICIAL_CATEGORIES = [
-  "브랜드 디자인", "편집/출판 디자인", "UI/UX 디자인", "그래픽/일러스트레이션",
-  "모션/영상 디자인", "3D/제품 디자인", "레터링/활자 디자인", "기타",
+  "브랜드 디자인",
+  "편집/출판 디자인",
+  "UI/UX 디자인",
+  "그래픽/일러스트레이션",
+  "모션/영상 디자인",
+  "3D/제품 디자인",
+  "레터링/활자 디자인",
+  "기타",
 ];
 const RANK_IMAGES = {
   "브랜드 디자인": "https://i.imgur.com/vANoYXL.png",
@@ -27,49 +34,120 @@ const SLOT_DATA = [
 ];
 const ORNAMENT_DATA = {
   yellow: {
-    label: "추억", accent: "#f5b400",
+    label: "추억",
+    accent: "#f5b400",
     patterns: [
-      { cap: "https://i.imgur.com/bQ7Rfza.png", shape: "https://i.imgur.com/zKtjAX7.png" },
-      { cap: "https://i.imgur.com/BCSPZE1.png", shape: "https://i.imgur.com/hD4oE1b.png" },
-      { cap: "https://i.imgur.com/TdV7sJm.png", shape: "https://i.imgur.com/bHbSqx3.png" },
-      { cap: "https://i.imgur.com/pWkO6qb.png", shape: "https://i.imgur.com/SjnAzAJ.png" },
-      { cap: "https://i.imgur.com/AdlhJN0.png", shape: "https://i.imgur.com/6uiU5YA.png" },
-      { cap: "https://i.imgur.com/LwpNDIR.png", shape: "https://i.imgur.com/ujYQOfU.png" },
+      {
+        cap: "https://i.imgur.com/bQ7Rfza.png",
+        shape: "https://i.imgur.com/zKtjAX7.png",
+      },
+      {
+        cap: "https://i.imgur.com/BCSPZE1.png",
+        shape: "https://i.imgur.com/hD4oE1b.png",
+      },
+      {
+        cap: "https://i.imgur.com/TdV7sJm.png",
+        shape: "https://i.imgur.com/bHbSqx3.png",
+      },
+      {
+        cap: "https://i.imgur.com/pWkO6qb.png",
+        shape: "https://i.imgur.com/SjnAzAJ.png",
+      },
+      {
+        cap: "https://i.imgur.com/AdlhJN0.png",
+        shape: "https://i.imgur.com/6uiU5YA.png",
+      },
+      {
+        cap: "https://i.imgur.com/LwpNDIR.png",
+        shape: "https://i.imgur.com/ujYQOfU.png",
+      },
     ],
   },
   red: {
-    label: "고민", accent: "#c63926",
+    label: "고민",
+    accent: "#c63926",
     patterns: [
-      { cap: "https://i.imgur.com/hkHu9Eb.png", shape: "https://i.imgur.com/VPnVPam.png" },
-      { cap: "https://i.imgur.com/HnPoieL.png", shape: "https://i.imgur.com/Un0xHIP.png" },
-      { cap: "https://i.imgur.com/3meCnRR.png", shape: "https://i.imgur.com/qQkixfI.png" },
-      { cap: "https://i.imgur.com/xfCzHIu.png", shape: "https://i.imgur.com/JWSjR9n.png" },
-      { cap: "https://i.imgur.com/6G4J6xV.png", shape: "https://i.imgur.com/TZx9lSj.png" },
-      { cap: "https://i.imgur.com/8OJgTRS.png", shape: "https://i.imgur.com/9AT23K3.png" },
+      {
+        cap: "https://i.imgur.com/hkHu9Eb.png",
+        shape: "https://i.imgur.com/VPnVPam.png",
+      },
+      {
+        cap: "https://i.imgur.com/HnPoieL.png",
+        shape: "https://i.imgur.com/Un0xHIP.png",
+      },
+      {
+        cap: "https://i.imgur.com/3meCnRR.png",
+        shape: "https://i.imgur.com/qQkixfI.png",
+      },
+      {
+        cap: "https://i.imgur.com/xfCzHIu.png",
+        shape: "https://i.imgur.com/JWSjR9n.png",
+      },
+      {
+        cap: "https://i.imgur.com/6G4J6xV.png",
+        shape: "https://i.imgur.com/TZx9lSj.png",
+      },
+      {
+        cap: "https://i.imgur.com/8OJgTRS.png",
+        shape: "https://i.imgur.com/9AT23K3.png",
+      },
     ],
   },
   green: {
-    label: "다짐", accent: "#01c6cd",
+    label: "다짐",
+    accent: "#01c6cd",
     patterns: [
-      { cap: "https://i.imgur.com/q6d9qMg.png", shape: "https://i.imgur.com/57dM8PS.png" },
-      { cap: "https://i.imgur.com/0m62Uic.png", shape: "https://i.imgur.com/BQOqZMO.png" },
-      { cap: "https://i.imgur.com/LBTty3f.png", shape: "https://i.imgur.com/b8aUxEk.png" },
-      { cap: "https://i.imgur.com/VAqncS6.png", shape: "https://i.imgur.com/vgtcsuV.png" },
-      { cap: "https://i.imgur.com/H0MDosO.png", shape: "https://i.imgur.com/di8bXGL.png" },
-      { cap: "https://i.imgur.com/wJOtZWG.png", shape: "https://i.imgur.com/DIU5tmp.png" },
+      {
+        cap: "https://i.imgur.com/q6d9qMg.png",
+        shape: "https://i.imgur.com/57dM8PS.png",
+      },
+      {
+        cap: "https://i.imgur.com/0m62Uic.png",
+        shape: "https://i.imgur.com/BQOqZMO.png",
+      },
+      {
+        cap: "https://i.imgur.com/LBTty3f.png",
+        shape: "https://i.imgur.com/b8aUxEk.png",
+      },
+      {
+        cap: "https://i.imgur.com/VAqncS6.png",
+        shape: "https://i.imgur.com/vgtcsuV.png",
+      },
+      {
+        cap: "https://i.imgur.com/H0MDosO.png",
+        shape: "https://i.imgur.com/di8bXGL.png",
+      },
+      {
+        cap: "https://i.imgur.com/wJOtZWG.png",
+        shape: "https://i.imgur.com/DIU5tmp.png",
+      },
     ],
   },
 };
 
-let formData = { name: "", affiliation: "", interests: [], theme: "", title: "", content: "", phoneNumber: "", consent: false };
+let formData = {
+  name: "",
+  affiliation: "",
+  interests: [],
+  theme: "",
+  title: "",
+  content: "",
+  phoneNumber: "",
+  consent: false,
+};
 let postDataCache = [];
-let bgmAudio = null, isBgmPlaying = false;
-let currentThemeColor = "yellow", selectedOrnamentSrc = "", treeAngle = 20, currentTreeFilter = "";
-let currentShareFilter = "전체"; 
+let bgmAudio = null,
+  isBgmPlaying = false;
+let currentThemeColor = "yellow",
+  selectedOrnamentSrc = "",
+  treeAngle = 20,
+  currentTreeFilter = "";
+let currentShareFilter = "전체";
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
-    if (typeof lucide !== "undefined" && lucide.createIcons) lucide.createIcons();
+    if (typeof lucide !== "undefined" && lucide.createIcons)
+      lucide.createIcons();
   } catch (e) {}
 
   createSnow();
@@ -83,93 +161,116 @@ document.addEventListener("DOMContentLoaded", () => {
   let initialTreeAngle = 0;
 
   if (treeScene) {
-    treeScene.addEventListener("touchstart", (e) => {
+    treeScene.addEventListener(
+      "touchstart",
+      (e) => {
         touchStartX = e.touches[0].clientX;
         initialTreeAngle = treeAngle;
-      }, { passive: true });
-    treeScene.addEventListener("touchmove", (e) => {
+      },
+      { passive: true }
+    );
+    treeScene.addEventListener(
+      "touchmove",
+      (e) => {
         const touchCurrentX = e.touches[0].clientX;
         const diffX = touchCurrentX - touchStartX;
         treeAngle = initialTreeAngle + diffX * 0.5;
         updateTreeRotation();
-      }, { passive: true });
+      },
+      { passive: true }
+    );
   }
 
   const goTreeBtn = document.getElementById("goTreeButton");
-  if(goTreeBtn) {
-      goTreeBtn.addEventListener("click", () => {
-        if (!selectedOrnamentSrc) return alert("오너먼트를 선택해주세요.");
-        goToPage("tree");
-      });
+  if (goTreeBtn) {
+    goTreeBtn.addEventListener("click", () => {
+      if (!selectedOrnamentSrc) return alert("오너먼트를 선택해주세요.");
+      goToPage("tree");
+    });
   }
 
   const leftBtn = document.getElementById("arrow-left");
-  if(leftBtn) leftBtn.addEventListener("click", () => { treeAngle -= 30; updateTreeRotation(); });
-  
+  if (leftBtn)
+    leftBtn.addEventListener("click", () => {
+      treeAngle -= 30;
+      updateTreeRotation();
+    });
+
   const rightBtn = document.getElementById("arrow-right");
-  if(rightBtn) rightBtn.addEventListener("click", () => { treeAngle += 30; updateTreeRotation(); });
+  if (rightBtn)
+    rightBtn.addEventListener("click", () => {
+      treeAngle += 30;
+      updateTreeRotation();
+    });
 
   const limitClose = document.getElementById("limitCloseBtn");
-  if(limitClose) {
-      limitClose.addEventListener("click", () => {
-        document.getElementById("limitModal").classList.add("hidden");
-        document.getElementById("limitModal").classList.remove("flex");
-      });
+  if (limitClose) {
+    limitClose.addEventListener("click", () => {
+      document.getElementById("limitModal").classList.add("hidden");
+      document.getElementById("limitModal").classList.remove("flex");
+    });
   }
 
   goToPage("main");
-  startMainPageStats(); 
+  startMainPageStats();
 });
 
-// ▼▼▼ [수정됨] 이벤트 토글 함수 (전역 위치로 이동) ▼▼▼
 function toggleEventInputs() {
   const isJoined = document.getElementById("event-join-check").checked;
   const inputArea = document.getElementById("event-inputs");
-  if(isJoined) {
+  if (isJoined) {
     inputArea.classList.remove("hidden");
   } else {
     inputArea.classList.add("hidden");
-    // 닫을 때 값 초기화
     document.getElementById("input-phone").value = "";
     document.getElementById("consent-check").checked = false;
   }
 }
-// ▲▲▲ [수정 완료] ▲▲▲
 
 function startNewSurvey() {
-  formData = { name: "", affiliation: "", interests: [], theme: "", title: "", content: "", phoneNumber: "", consent: false };
+  formData = {
+    name: "",
+    affiliation: "",
+    interests: [],
+    theme: "",
+    title: "",
+    content: "",
+    phoneNumber: "",
+    consent: false,
+  };
   const inputName = document.getElementById("input-name");
-  if(inputName) inputName.value = "";
-  
+  if (inputName) inputName.value = "";
+
   document.querySelectorAll(".aff-btn").forEach((b) => {
     b.classList.remove("active", "bg-[#6E1A1A]", "text-white");
     b.classList.add("bg-white", "text-[#6E1A1A]/80");
   });
-  document.querySelectorAll("input[type=checkbox]").forEach((c) => (c.checked = false));
-  
+  document
+    .querySelectorAll("input[type=checkbox]")
+    .forEach((c) => (c.checked = false));
+
   const themeList = document.getElementById("theme-dropdown-list");
-  if(themeList) themeList.classList.add("hidden");
-  
+  if (themeList) themeList.classList.add("hidden");
+
   const themeBtnSpan = document.querySelector("#theme-dropdown-btn span");
-  if(themeBtnSpan) themeBtnSpan.textContent = "눌러서 주제 선택!";
-  
+  if (themeBtnSpan) themeBtnSpan.textContent = "눌러서 주제 선택!";
+
   const pTitle = document.getElementById("post-title");
-  if(pTitle) pTitle.value = "";
-  
+  if (pTitle) pTitle.value = "";
+
   const pContent = document.getElementById("post-content");
-  if(pContent) pContent.value = "";
-  
+  if (pContent) pContent.value = "";
+
   const gradeContainer = document.getElementById("grade-selector-container");
-  if(gradeContainer) gradeContainer.classList.add("hidden");
-  
+  if (gradeContainer) gradeContainer.classList.add("hidden");
+
   const treeHint = document.getElementById("treeHint");
-  if(treeHint) treeHint.classList.add("hidden");
-  
-  // 이벤트 섹션 초기화
+  if (treeHint) treeHint.classList.add("hidden");
+
   const joinCheck = document.getElementById("event-join-check");
-  if(joinCheck) {
-      joinCheck.checked = false;
-      toggleEventInputs(); 
+  if (joinCheck) {
+    joinCheck.checked = false;
+    toggleEventInputs();
   }
 
   goToPage("common");
@@ -190,7 +291,9 @@ function createSnow() {
     flake.style.opacity = Math.random() * 0.5 + 0.4;
     const duration = Math.random() * 10 + 10;
     flake.style.animationDuration = `${duration}s, ${Math.random() * 3 + 2}s`;
-    flake.style.animationDelay = `-${Math.random() * 20}s, -${Math.random() * 5}s`;
+    flake.style.animationDelay = `-${Math.random() * 20}s, -${
+      Math.random() * 5
+    }s`;
     container.appendChild(flake);
   }
 }
@@ -198,8 +301,8 @@ function createSnow() {
 function setupCustomCursor() {
   const cursor = document.getElementById("custom-cursor");
   const glow = document.getElementById("cursor-glow");
-  if(!cursor) return;
-  
+  if (!cursor) return;
+
   document.addEventListener("mousemove", (e) => {
     cursor.style.left = e.clientX + "px";
     cursor.style.top = e.clientY + "px";
@@ -209,55 +312,63 @@ function setupCustomCursor() {
     }
   });
   document.querySelectorAll(".dark-cursor-area").forEach((el) => {
-    el.addEventListener("mouseenter", () => cursor.classList.add("cursor-dark"));
-    el.addEventListener("mouseleave", () => cursor.classList.remove("cursor-dark"));
+    el.addEventListener("mouseenter", () =>
+      cursor.classList.add("cursor-dark")
+    );
+    el.addEventListener("mouseleave", () =>
+      cursor.classList.remove("cursor-dark")
+    );
   });
 }
 
 function setupBGM() {
   bgmAudio = document.getElementById("bgm");
-  if(!bgmAudio) return;
+  if (!bgmAudio) return;
   bgmAudio.volume = 0.5;
-  document.body.addEventListener("click", () => {
+  document.body.addEventListener(
+    "click",
+    () => {
       if (!isBgmPlaying) {
         bgmAudio.play();
         isBgmPlaying = true;
       }
-    }, { once: true });
-  
+    },
+    { once: true }
+  );
+
   const toggleBtn = document.getElementById("bgm-toggle");
-  if(toggleBtn) {
-      toggleBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        if (bgmAudio.paused) {
-          bgmAudio.play();
-          isBgmPlaying = true;
-        } else {
-          bgmAudio.pause();
-          isBgmPlaying = false;
-        }
-      });
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (bgmAudio.paused) {
+        bgmAudio.play();
+        isBgmPlaying = true;
+      } else {
+        bgmAudio.pause();
+        isBgmPlaying = false;
+      }
+    });
   }
 }
 
 function setupMenu() {
   const menuToggle = document.getElementById("menu-toggle");
-  if(menuToggle) {
-      menuToggle.addEventListener("click", () => {
-        const overlay = document.getElementById("menu-overlay");
-        overlay.classList.remove("hidden");
-        setTimeout(() => overlay.classList.remove("opacity-0"), 10);
-      });
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      const overlay = document.getElementById("menu-overlay");
+      overlay.classList.remove("hidden");
+      setTimeout(() => overlay.classList.remove("opacity-0"), 10);
+    });
   }
   const menuClose = document.getElementById("menu-close");
-  if(menuClose) menuClose.addEventListener("click", closeMenu);
+  if (menuClose) menuClose.addEventListener("click", closeMenu);
 }
 
 function closeMenu() {
   const overlay = document.getElementById("menu-overlay");
-  if(overlay) {
-      overlay.classList.add("opacity-0");
-      setTimeout(() => overlay.classList.add("hidden"), 300);
+  if (overlay) {
+    overlay.classList.add("opacity-0");
+    setTimeout(() => overlay.classList.add("hidden"), 300);
   }
 }
 
@@ -267,58 +378,48 @@ window.handleMenuClick = function (pageId) {
   else goToPage(pageId);
 };
 
+// ▼▼▼ [수정됨] 페이지 이동 및 로딩 제어 핵심 로직 ▼▼▼
 function goToPage(pageId) {
+  // 1. 공통 초기화
   if (pageId === "main") {
-    // Main 초기화 로직
-    formData = { name: "", affiliation: "", interests: [], theme: "", title: "", content: "" };
-    
+    formData = {
+      name: "",
+      affiliation: "",
+      interests: [],
+      theme: "",
+      title: "",
+      content: "",
+    };
     const iName = document.getElementById("input-name");
-    if(iName) iName.value = "";
+    if (iName) iName.value = "";
     const pTitle = document.getElementById("post-title");
-    if(pTitle) pTitle.value = "";
+    if (pTitle) pTitle.value = "";
     const pContent = document.getElementById("post-content");
-    if(pContent) pContent.value = "";
+    if (pContent) pContent.value = "";
 
     document.querySelectorAll(".aff-btn").forEach((b) => {
-      b.classList.remove("active", "bg-[#6E1A1A]", "text-white", "border-[#6E1A1A]");
+      b.classList.remove(
+        "active",
+        "bg-[#6E1A1A]",
+        "text-white",
+        "border-[#6E1A1A]"
+      );
       b.classList.add("bg-white", "text-[#6E1A1A]/80", "border-[#6E1A1A]/30");
     });
-    document.querySelectorAll("input[type=checkbox]").forEach((c) => (c.checked = false));
+    document
+      .querySelectorAll("input[type=checkbox]")
+      .forEach((c) => (c.checked = false));
 
-    const dropSpan = document.querySelector("#theme-dropdown-btn span");
-    if (dropSpan) dropSpan.textContent = "주제를 선택해주세요";
-    const dropList = document.getElementById("theme-dropdown-list");
-    if(dropList) dropList.classList.add("hidden");
-
-    const searchInput = document.getElementById("tree-search-input");
-    if (searchInput) searchInput.value = "";
-
-    treeAngle = 40;
-    updateTreeRotation();
-    currentTreeFilter = "";
-
+    // 편지봉투 애니메이션 리셋
     const paper = document.getElementById("animating-paper");
     if (paper) paper.classList.remove("slide-into-envelope");
-
     const envOpen = document.getElementById("envelope-open");
     const envClosed = document.getElementById("envelope-closed");
     if (envOpen) envOpen.classList.remove("opacity-0");
     if (envClosed) envClosed.classList.add("opacity-0");
-
-    const waitModal = document.getElementById("waitModal");
-    if (waitModal) {
-      waitModal.classList.add("hidden");
-      waitModal.classList.remove("flex", "opacity-100");
-    }
   }
 
-  // 눈 내리는 효과 제어
-  const snow = document.getElementById("snow-container");
-  if(snow) {
-      if (pageId === "main" || pageId === "tree") snow.style.display = "block";
-      else snow.style.display = "none";
-  }
-
+  // 2. 섹션 전환
   document.querySelectorAll(".page-section").forEach((el) => {
     el.classList.remove("active");
     setTimeout(() => {
@@ -328,22 +429,43 @@ function goToPage(pageId) {
 
   const target = document.getElementById("page-" + pageId);
   if (!target) return;
-
   target.style.display = "flex";
   setTimeout(() => target.classList.add("active"), 10);
 
-  const mToggle = document.getElementById("menu-toggle");
-  if(mToggle) {
-      if (pageId === "main") mToggle.classList.remove("hidden");
-      else mToggle.classList.add("hidden");
+  // 3. 페이지별 특수 로직
+  // [중요] 트리 페이지일 때: 로딩을 먼저 보여주고, setTimeout으로 실행을 미룸
+  if (pageId === "tree") {
+    const loader = document.getElementById("loading-overlay");
+    const msg = document.getElementById("loading-msg");
+    if (loader && msg) {
+      msg.textContent = "트리 데이터를 불러오는 중...";
+      loader.classList.remove("hidden"); // 로딩 즉시 표시
+    }
+
+    // 브라우저가 로딩 화면을 그릴 시간을 줌 (50ms)
+    setTimeout(() => {
+      initTreePage();
+    }, 50);
+  } else if (pageId === "ornament") initOrnamentPage();
+  else if (pageId === "share_list") renderShareListPage();
+  else if (pageId === "ranking") renderRankingPage();
+  else if (pageId === "my_record") renderMyRecordPage();
+
+  // 눈 내리는 효과 제어
+  const snow = document.getElementById("snow-container");
+  if (snow) {
+    if (pageId === "main" || pageId === "tree") snow.style.display = "block";
+    else snow.style.display = "none";
   }
 
-  if (pageId === "ornament") initOrnamentPage();
-  if (pageId === "tree") initTreePage();
-  if (pageId === "share_list") renderShareListPage();
-  if (pageId === "ranking") renderRankingPage();
-  if (pageId === "my_record") renderMyRecordPage();
+  // 햄버거 메뉴 제어
+  const mToggle = document.getElementById("menu-toggle");
+  if (mToggle) {
+    if (pageId === "main") mToggle.classList.remove("hidden");
+    else mToggle.classList.add("hidden");
+  }
 }
+// ▲▲▲ [수정 완료] ▲▲▲
 
 function setupEventListeners() {
   document.querySelectorAll(".aff-btn").forEach((btn) => {
@@ -352,21 +474,15 @@ function setupEventListeners() {
         b.classList.remove("bg-[#6E1A1A]", "text-white", "border-[#6E1A1A]");
         b.classList.add("bg-white", "text-[#6E1A1A]/80", "border-[#6E1A1A]/30");
       });
-      btn.classList.remove("bg-white", "text-[#6E1A1A]/80", "border-[#6E1A1A]/30");
+      btn.classList.remove(
+        "bg-white",
+        "text-[#6E1A1A]/80",
+        "border-[#6E1A1A]/30"
+      );
       btn.classList.add("bg-[#6E1A1A]", "text-white", "border-[#6E1A1A]");
-      
+
       formData.affiliation = btn.getAttribute("data-value");
       renderThemeOptions(formData.affiliation);
-
-      // 소속에 따른 문구 변경
-      const q4Desc = document.getElementById("q4-description");
-      if (q4Desc) {
-        if (formData.affiliation === "교수님") {
-          q4Desc.textContent = "학생들에게 따뜻한 응원과 조언을 나눠주시고 더 훈훈한 연말 보내세요!";
-        } else {
-          q4Desc.textContent = "마음 한 조각 트리에 걸어두고, 조금 더 홀가분한 연말 보내세요.";
-        }
-      }
     });
   });
 }
@@ -379,13 +495,15 @@ function toggleThemeDropdown() {
 function renderThemeOptions(affiliation) {
   const container = document.getElementById("theme-dropdown-list");
   container.innerHTML = "";
-  let themes = affiliation === "교수님"
+  let themes =
+    affiliation === "교수님"
       ? ["응원", "조언"]
       : ["올해의 추억", "현재의 고민", "미래의 다짐"];
-  
+
   themes.forEach((theme) => {
     const div = document.createElement("div");
-    div.className = "px-4 py-2 hover:bg-[#6E1A1A]/10 cursor-pointer text-sm text-[#6E1A1A] border-b border-[#6E1A1A]/10";
+    div.className =
+      "px-4 py-2 hover:bg-[#6E1A1A]/10 cursor-pointer text-sm text-[#6E1A1A] border-b border-[#6E1A1A]/10";
     div.textContent = theme;
     div.onclick = () => {
       formData.theme = theme;
@@ -396,13 +514,14 @@ function renderThemeOptions(affiliation) {
   });
 }
 
-// ▼▼▼ [수정됨] 유효성 검사 로직 (전화번호/동의 추가) ▼▼▼
 function validateAndGoToGrade() {
   const iName = document.getElementById("input-name");
-  formData.name = (iName && iName.value) ? iName.value : "익명";
-  
-  formData.interests = Array.from(document.querySelectorAll('input[name="interests"]:checked')).map((cb) => cb.value);
-  
+  formData.name = iName && iName.value ? iName.value : "익명";
+
+  formData.interests = Array.from(
+    document.querySelectorAll('input[name="interests"]:checked')
+  ).map((cb) => cb.value);
+
   if (!formData.affiliation || !formData.theme) {
     alert("필수 문항을 완료해주세요!");
     return;
@@ -411,36 +530,36 @@ function validateAndGoToGrade() {
     alert("필수 문항을 완료해주세요!");
     return;
   }
-  
+
   const isJoined = document.getElementById("event-join-check").checked;
   if (isJoined) {
-      const phoneInput = document.getElementById("input-phone").value.trim();
-      const consentCheck = document.getElementById("consent-check").checked;
-
-      // 간단한 전화번호 포맷 체크 (선택사항)
-      if (!phoneInput) {
-          alert("이벤트 참가를 위해 전화번호를 입력해주세요.");
-          return;
-      }
-      if (!consentCheck) {
-          alert("개인정보 수집 및 이용에 동의해주세요.");
-          return;
-      }
-      formData.phoneNumber = phoneInput;
-      formData.consent = true;
+    const phoneInput = document.getElementById("input-phone").value.trim();
+    const consentCheck = document.getElementById("consent-check").checked;
+    if (!phoneInput) {
+      alert("이벤트 참가를 위해 전화번호를 입력해주세요.");
+      return;
+    }
+    if (!consentCheck) {
+      alert("개인정보 수집 및 이용에 동의해주세요.");
+      return;
+    }
+    formData.phoneNumber = phoneInput;
+    formData.consent = true;
   } else {
-      formData.phoneNumber = "";
-      formData.consent = false;
+    formData.phoneNumber = "";
+    formData.consent = false;
   }
 
-  document.getElementById("grade-header-subtitle").textContent = `(${formData.theme})`;
+  document.getElementById(
+    "grade-header-subtitle"
+  ).textContent = `(${formData.theme})`;
   document.getElementById("display-name").textContent = formData.name;
-  document.getElementById("display-affiliation").textContent = formData.affiliation;
+  document.getElementById("display-affiliation").textContent =
+    formData.affiliation;
   document.getElementById("display-theme").textContent = formData.theme;
-  
+
   goToPage("grade");
 }
-// ▲▲▲ [수정 완료] ▲▲▲
 
 function goToOrnamentStep() {
   const title = document.getElementById("post-title").value;
@@ -451,19 +570,21 @@ function goToOrnamentStep() {
   }
   formData.title = title;
   formData.content = content;
-  
+
   document.getElementById("final-message-preview").textContent = content;
   goToPage("animation");
-  
+
   setTimeout(() => {
-    document.getElementById("animating-paper").classList.add("slide-into-envelope");
+    document
+      .getElementById("animating-paper")
+      .classList.add("slide-into-envelope");
   }, 800);
-  
+
   setTimeout(() => {
     document.getElementById("envelope-open").classList.add("opacity-0");
     document.getElementById("envelope-closed").classList.remove("opacity-0");
   }, 1600);
-  
+
   setTimeout(() => {
     const waitModal = document.getElementById("waitModal");
     waitModal.classList.remove("hidden");
@@ -483,21 +604,23 @@ function goToOrnamentStep() {
 }
 
 function initOrnamentPage() {
-  if (formData.theme.includes("추억") || formData.theme.includes("응원")) currentThemeColor = "yellow";
-  else if (formData.theme.includes("고민") || formData.theme.includes("조언")) currentThemeColor = "red";
+  if (formData.theme.includes("추억") || formData.theme.includes("응원"))
+    currentThemeColor = "yellow";
+  else if (formData.theme.includes("고민") || formData.theme.includes("조언"))
+    currentThemeColor = "red";
   else currentThemeColor = "green";
-  
+
   const config = ORNAMENT_DATA[currentThemeColor];
   const catPill = document.getElementById("categoryPill");
   catPill.textContent = config.label;
   catPill.style.backgroundColor = config.accent;
   document.documentElement.style.setProperty("--accent-color", config.accent);
-  
+
   const shapeRow = document.getElementById("shapeRow");
   shapeRow.innerHTML = "";
   selectedOrnamentSrc = config.patterns[0].cap;
   document.getElementById("mainOrnament").src = selectedOrnamentSrc;
-  
+
   config.patterns.forEach((p, idx) => {
     const btn = document.createElement("button");
     btn.className = `thumb ${idx === 0 ? "active" : ""}`;
@@ -505,13 +628,16 @@ function initOrnamentPage() {
     btn.onclick = () => {
       selectedOrnamentSrc = p.cap;
       document.getElementById("mainOrnament").src = p.cap;
-      document.querySelectorAll(".thumb").forEach((t) => t.classList.remove("active"));
+      document
+        .querySelectorAll(".thumb")
+        .forEach((t) => t.classList.remove("active"));
       btn.classList.add("active");
     };
     shapeRow.appendChild(btn);
   });
 }
 
+// ▼▼▼ [수정됨] 트리 초기화 로직 ▼▼▼
 async function initTreePage() {
   createStars();
   const treeContainer = document.getElementById("tree3d");
@@ -536,7 +662,10 @@ async function initTreePage() {
   }
   updateTreeRotation();
 
+  // gasCall은 finally에서 로딩을 숨김.
+  // goToPage에서 이미 로딩을 띄웠으므로, gasCall이 끝나면 자연스럽게 로딩이 꺼짐.
   const result = await gasCall("getPostList", {}, "GET");
+
   if (result.success) {
     postDataCache = result.data;
     let initialFilter = formData.affiliation || "1학년";
@@ -544,19 +673,22 @@ async function initTreePage() {
   }
 
   if (formData.title) {
-    // 글 쓰고 온 경우
     renderSlotMarkers();
     hintEl.innerHTML = "트리의 빨간 점을 눌러<br>오너먼트 위치를 고르세요";
     hintEl.classList.remove("hidden");
     document.getElementById("grade-selector-container").classList.add("hidden");
   } else {
-    // 그냥 구경 온 경우
-    document.getElementById("grade-selector-container").classList.remove("hidden");
+    document
+      .getElementById("grade-selector-container")
+      .classList.remove("hidden");
   }
 }
+// ▲▲▲ [수정 완료] ▲▲▲
 
 function updateTreeRotation() {
-  document.getElementById("tree3d").style.transform = `rotateY(${treeAngle}deg)`;
+  document.getElementById(
+    "tree3d"
+  ).style.transform = `rotateY(${treeAngle}deg)`;
 }
 
 function changeTreeGrade(grade) {
@@ -578,9 +710,11 @@ function changeTreeGrade(grade) {
   postDataCache.forEach((post) => {
     let show = false;
     if (currentTreeFilter === "merged") {
-      if (post.Affiliation === "전공심화" || post.Affiliation === "교수님") show = true;
+      if (post.Affiliation === "전공심화" || post.Affiliation === "교수님")
+        show = true;
     } else {
-      if (post.Affiliation && post.Affiliation.includes(currentTreeFilter)) show = true;
+      if (post.Affiliation && post.Affiliation.includes(currentTreeFilter))
+        show = true;
     }
 
     if (show) {
@@ -629,9 +763,7 @@ function renderSlotMarkers() {
   });
 }
 
-// ▼▼▼ [수정됨] 데이터 전송 (전화번호/동의 포함) ▼▼▼
 async function handlePlaceOrnament(orbPoint) {
-  // 1. 빈 자리 찾기
   const occupiedPanelIndices = [];
   postDataCache.forEach((post) => {
     if (post.Affiliation && post.Affiliation.includes(formData.affiliation)) {
@@ -658,7 +790,6 @@ async function handlePlaceOrnament(orbPoint) {
     return;
   }
 
-  // 2. 오너먼트 미리 달기 및 회전
   const randomPanelIdx =
     availablePanels[Math.floor(Math.random() * availablePanels.length)];
   const panelAngle = randomPanelIdx * 20;
@@ -677,7 +808,6 @@ async function handlePlaceOrnament(orbPoint) {
   document.getElementById("loading-msg").textContent = "오너먼트 다는 중...";
   document.getElementById("loading-overlay").classList.remove("hidden");
 
-  // 3. 서버 저장 요청 (수정됨: phoneNumber, consent 추가)
   const metaStr = `||ORNAMENT|${randomPanelIdx}|${orbPoint.x}|${orbPoint.y}|${selectedOrnamentSrc}`;
   const finalInterests = formData.interests.join(", ") + metaStr;
 
@@ -690,16 +820,15 @@ async function handlePlaceOrnament(orbPoint) {
       postType: formData.theme,
       title: formData.title,
       content: formData.content,
-      phoneNumber: formData.phoneNumber, 
-      consent: formData.consent
+      phoneNumber: formData.phoneNumber,
+      consent: formData.consent,
     },
     "POST"
   );
 
-  // 4. 로딩 종료 및 입력 폼 초기화
   document.getElementById("loading-overlay").classList.add("hidden");
   document.getElementById("loading-msg").textContent = "데이터 처리 중...";
-  
+
   formData.title = "";
   document.getElementById("slot-container").innerHTML = "";
   document.getElementById("treeHint").classList.add("hidden");
@@ -707,29 +836,27 @@ async function handlePlaceOrnament(orbPoint) {
     .getElementById("grade-selector-container")
     .classList.remove("hidden");
 
-  // 배너 로직
   const bannerEl = document.getElementById("star-promo-banner");
   if (bannerEl) {
     bannerEl.classList.add("hidden");
     bannerEl.classList.remove("opacity-100");
 
     setTimeout(() => {
-        bannerEl.classList.remove("hidden");
-        setTimeout(() => bannerEl.classList.add("opacity-100"), 50);
+      bannerEl.classList.remove("hidden");
+      setTimeout(() => bannerEl.classList.add("opacity-100"), 50);
     }, 1000);
 
     setTimeout(() => {
-        bannerEl.classList.remove("opacity-100");
-        setTimeout(() => bannerEl.classList.add("hidden"), 1000);
+      bannerEl.classList.remove("opacity-100");
+      setTimeout(() => bannerEl.classList.add("hidden"), 1000);
     }, 6000);
   }
 
-  // 5. 데이터 갱신
   const refresh = await gasCall("getPostList", {}, "GET");
 
   if (refresh.success) {
     postDataCache = refresh.data;
-    changeTreeGrade(formData.affiliation); // 트리 갱신
+    changeTreeGrade(formData.affiliation);
 
     let myGradeCount = 0;
     const myAff = formData.affiliation;
@@ -779,9 +906,15 @@ function searchTreeUser() {
   }
 }
 
+// ▼▼▼ [수정됨] gasCall 조건 완화 ▼▼▼
 async function gasCall(action, data = {}, method = "POST") {
-  if (document.getElementById("loading-msg").textContent === "데이터 처리 중...")
-    document.getElementById("loading-overlay").classList.remove("hidden");
+  // 어떤 상황이든 로딩바가 꺼져 있다면 켜준다.
+  // 단, 문구 변경은 하지 않음 (호출하는 쪽에서 커스텀 문구 설정 가능)
+  const loader = document.getElementById("loading-overlay");
+  if (loader.classList.contains("hidden")) {
+    loader.classList.remove("hidden");
+  }
+
   try {
     let res;
     if (method === "POST")
@@ -801,12 +934,16 @@ async function gasCall(action, data = {}, method = "POST") {
     console.log(e);
     return { success: false };
   } finally {
-    document.getElementById("loading-overlay").classList.add("hidden");
+    // 모든 작업이 끝나면 무조건 로딩 숨김
+    loader.classList.add("hidden");
   }
 }
+// ▲▲▲ [수정 완료] ▲▲▲
 
-const commonBtnClass = "bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full hover:bg-white/30 flex items-center justify-center transition-all cursor-none border-none shadow-lg";
-const redBtnClass = "bg-[#C9302C] hover:bg-[#a92522] text-white px-6 py-2 rounded-full flex items-center justify-center transition-all cursor-none border-none shadow-lg font-bold";
+const commonBtnClass =
+  "bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full hover:bg-white/30 flex items-center justify-center transition-all cursor-none border-none shadow-lg";
+const redBtnClass =
+  "bg-[#C9302C] hover:bg-[#a92522] text-white px-6 py-2 rounded-full flex items-center justify-center transition-all cursor-none border-none shadow-lg font-bold";
 
 async function renderShareListPage() {
   const container = document.getElementById("share-list-container");
@@ -818,12 +955,24 @@ async function renderShareListPage() {
       </div>
 
       <div class="rank-filter-container flex justify-center gap-6 mb-4 overflow-x-auto px-4 w-full" style="min-height:40px;">
-          <button class="rank-filter-btn ${currentShareFilter === '전체' ? 'active-filter' : ''}" onclick="filterShareList('전체')">전체</button>
-          <button class="rank-filter-btn ${currentShareFilter === '추억' ? 'active-filter' : ''}" onclick="filterShareList('추억')">추억</button>
-          <button class="rank-filter-btn ${currentShareFilter === '고민' ? 'active-filter' : ''}" onclick="filterShareList('고민')">고민</button>
-          <button class="rank-filter-btn ${currentShareFilter === '다짐' ? 'active-filter' : ''}" onclick="filterShareList('다짐')">다짐</button>
-          <button class="rank-filter-btn ${currentShareFilter === '응원' ? 'active-filter' : ''}" onclick="filterShareList('응원')">응원</button>
-          <button class="rank-filter-btn ${currentShareFilter === '조언' ? 'active-filter' : ''}" onclick="filterShareList('조언')">조언</button>
+          <button class="rank-filter-btn ${
+            currentShareFilter === "전체" ? "active-filter" : ""
+          }" onclick="filterShareList('전체')">전체</button>
+          <button class="rank-filter-btn ${
+            currentShareFilter === "추억" ? "active-filter" : ""
+          }" onclick="filterShareList('추억')">추억</button>
+          <button class="rank-filter-btn ${
+            currentShareFilter === "고민" ? "active-filter" : ""
+          }" onclick="filterShareList('고민')">고민</button>
+          <button class="rank-filter-btn ${
+            currentShareFilter === "다짐" ? "active-filter" : ""
+          }" onclick="filterShareList('다짐')">다짐</button>
+          <button class="rank-filter-btn ${
+            currentShareFilter === "응원" ? "active-filter" : ""
+          }" onclick="filterShareList('응원')">응원</button>
+          <button class="rank-filter-btn ${
+            currentShareFilter === "조언" ? "active-filter" : ""
+          }" onclick="filterShareList('조언')">조언</button>
       </div>
 
       <div id="post-list-area" class="h-[450px] overflow-y-auto p-4 shadow-xl mb-10 custom-scrollbar w-[85%] max-w-[800px] mx-auto bg-[#0b0f20d9] rounded-2xl border border-white/10 backdrop-blur-sm">
@@ -842,17 +991,20 @@ async function renderShareListPage() {
       postDataCache = res.data;
     }
   }
-  
+
   renderShareListItems();
 }
 
-window.filterShareList = function(filterType) {
+window.filterShareList = function (filterType) {
   currentShareFilter = filterType;
-  
-  const buttons = document.querySelectorAll('#share-list-container .rank-filter-btn');
-  buttons.forEach(btn => {
-    if(btn.textContent.trim() === filterType) btn.classList.add('active-filter');
-    else btn.classList.remove('active-filter');
+
+  const buttons = document.querySelectorAll(
+    "#share-list-container .rank-filter-btn"
+  );
+  buttons.forEach((btn) => {
+    if (btn.textContent.trim() === filterType)
+      btn.classList.add("active-filter");
+    else btn.classList.remove("active-filter");
   });
 
   renderShareListItems();
@@ -861,21 +1013,22 @@ window.filterShareList = function(filterType) {
 function renderShareListItems() {
   const listArea = document.getElementById("post-list-area");
   if (!postDataCache || postDataCache.length === 0) {
-    listArea.innerHTML = '<p class="text-center text-white mt-10">불러올 글이 없습니다.</p>';
+    listArea.innerHTML =
+      '<p class="text-center text-white mt-10">불러올 글이 없습니다.</p>';
     return;
   }
 
-  const filtered = postDataCache.filter(p => {
+  const filtered = postDataCache.filter((p) => {
     if (currentShareFilter === "전체") return true;
-    
-    const type = p.PostType || ""; 
-    
+
+    const type = p.PostType || "";
+
     if (currentShareFilter === "추억") return type.includes("추억");
     if (currentShareFilter === "고민") return type.includes("고민");
     if (currentShareFilter === "다짐") return type.includes("다짐");
     if (currentShareFilter === "응원") return type.includes("응원");
     if (currentShareFilter === "조언") return type.includes("조언");
-    
+
     return false;
   });
 
@@ -884,15 +1037,27 @@ function renderShareListItems() {
     return;
   }
 
-  listArea.innerHTML = filtered.map(p => `
-    <div class="share-list-item block w-full text-left mb-2 p-4 rounded-lg hover:bg-white/10 transition-colors border-b border-white/10 cursor-none" onclick="showPostDetail('${p.ID}')">
+  listArea.innerHTML = filtered
+    .map(
+      (p) => `
+    <div class="share-list-item block w-full text-left mb-2 p-4 rounded-lg hover:bg-white/10 transition-colors border-b border-white/10 cursor-none" onclick="showPostDetail('${
+      p.ID
+    }')">
       <div class="flex justify-between items-end mb-1">
-        <span class="text-xs text-[#C5A059] border border-[#C5A059] px-2 py-0.5 rounded-full font-['Noto_Sans_KR']">${p.PostType || '기타'}</span>
-        <span class="text-xs text-gray-400 font-['Noto_Sans_KR']">닉네임 : ${p.Name}</span>
+        <span class="text-xs text-[#C5A059] border border-[#C5A059] px-2 py-0.5 rounded-full font-['Noto_Sans_KR']">${
+          p.PostType || "기타"
+        }</span>
+        <span class="text-xs text-gray-400 font-['Noto_Sans_KR']">닉네임 : ${
+          p.Name
+        }</span>
       </div>
-      <p class="text-lg font-bold text-white truncate font-['Noto_Sans_KR'] mt-1">제목 : ${p.Title}</p>
+      <p class="text-lg font-bold text-white truncate font-['Noto_Sans_KR'] mt-1">제목 : ${
+        p.Title
+      }</p>
     </div>
-  `).join("");
+  `
+    )
+    .join("");
 }
 
 function renderRankingPage() {
@@ -931,7 +1096,11 @@ async function fetchRanking(filter) {
   topRankArea.innerHTML = '<p class="text-gray-400">집계 중...</p>';
   fullRankList.innerHTML = "";
 
-  const result = await gasCall("getInterestRanking", { affiliation: filter }, "GET");
+  const result = await gasCall(
+    "getInterestRanking",
+    { affiliation: filter },
+    "GET"
+  );
   if (result.success && Array.isArray(result.data)) {
     const rankingData = processRankingData(result.data);
 
@@ -951,7 +1120,10 @@ async function fetchRanking(filter) {
       fullRankList.innerHTML = remaining
         .map((item, idx) => {
           const isOthers = item.Interest === "기타";
-          const tooltipHtml = (isOthers && item.Details) ? `<div class="rank-tooltip">${item.Details}</div>` : "";
+          const tooltipHtml =
+            isOthers && item.Details
+              ? `<div class="rank-tooltip">${item.Details}</div>`
+              : "";
           return `
                 <div class="rank-list-item relative">
                     <span class="rank-num">${idx + 4}</span>
@@ -963,7 +1135,8 @@ async function fetchRanking(filter) {
         })
         .join("");
     } else {
-      fullRankList.innerHTML = '<p class="text-center text-gray-500 text-sm p-4">순위권 밖 데이터 없음</p>';
+      fullRankList.innerHTML =
+        '<p class="text-center text-gray-500 text-sm p-4">순위권 밖 데이터 없음</p>';
     }
   } else topRankArea.innerHTML = '<p class="text-red-400">오류 발생</p>';
 }
@@ -980,15 +1153,30 @@ function processRankingData(rawData) {
     let targetCategory = "기타";
 
     if (cleanName.includes("브랜드")) targetCategory = "브랜드 디자인";
-    else if (cleanName.includes("편집") || cleanName.includes("출판")) targetCategory = "편집/출판 디자인";
-    else if (cleanName.includes("ui") || cleanName.includes("ux")) targetCategory = "UI/UX 디자인";
-    else if (cleanName.includes("그래픽") || cleanName.includes("일러스트") || cleanName.includes("캐릭터")) targetCategory = "그래픽/일러스트레이션";
-    else if (cleanName.includes("모션") || cleanName.includes("영상")) targetCategory = "모션/영상 디자인";
-    else if (cleanName.includes("3d") || cleanName.includes("제품") || cleanName.includes("비주얼")) targetCategory = "3D/제품 디자인";
-    else if (cleanName.includes("레터링") || cleanName.includes("활자")) targetCategory = "레터링/활자 디자인";
+    else if (cleanName.includes("편집") || cleanName.includes("출판"))
+      targetCategory = "편집/출판 디자인";
+    else if (cleanName.includes("ui") || cleanName.includes("ux"))
+      targetCategory = "UI/UX 디자인";
+    else if (
+      cleanName.includes("그래픽") ||
+      cleanName.includes("일러스트") ||
+      cleanName.includes("캐릭터")
+    )
+      targetCategory = "그래픽/일러스트레이션";
+    else if (cleanName.includes("모션") || cleanName.includes("영상"))
+      targetCategory = "모션/영상 디자인";
+    else if (
+      cleanName.includes("3d") ||
+      cleanName.includes("제품") ||
+      cleanName.includes("비주얼")
+    )
+      targetCategory = "3D/제품 디자인";
+    else if (cleanName.includes("레터링") || cleanName.includes("활자"))
+      targetCategory = "레터링/활자 디자인";
     else targetCategory = "기타";
 
-    if (counts[targetCategory] !== undefined) counts[targetCategory] += item.Count;
+    if (counts[targetCategory] !== undefined)
+      counts[targetCategory] += item.Count;
     if (targetCategory === "기타") details["기타"].add(name);
   });
 
@@ -1003,9 +1191,13 @@ function processRankingData(rawData) {
 }
 
 function createRankCircleHtml(item, rank) {
-  const imgUrl = RANK_IMAGES[item.Interest] || "https://i.imgur.com/uMsWosV.png";
+  const imgUrl =
+    RANK_IMAGES[item.Interest] || "https://i.imgur.com/uMsWosV.png";
   const isOthers = item.Interest === "기타";
-  const tooltipHtml = (isOthers && item.Details) ? `<div class="rank-tooltip">${item.Details}</div>` : "";
+  const tooltipHtml =
+    isOthers && item.Details
+      ? `<div class="rank-tooltip">${item.Details}</div>`
+      : "";
   return `
         <div class="rank-item-container rank-${rank} rank-list-item">
             <div class="rank-circle-img" style="background-image: url('${imgUrl}') !important;">
@@ -1049,12 +1241,18 @@ async function renderMyRecordPage() {
     const result = await gasCall("getPostList", {}, "GET");
     if (result.success) {
       postDataCache = result.data;
-      document.getElementById("my-post-list-area").innerHTML = `<p class="text-center text-white mt-10">닉네임 입력하고 조회 버튼을 눌러주세요.</p>`;
+      document.getElementById(
+        "my-post-list-area"
+      ).innerHTML = `<p class="text-center text-white mt-10">닉네임 입력하고 조회 버튼을 눌러주세요.</p>`;
     } else {
-      document.getElementById("my-post-list-area").innerHTML = `<p class="text-center text-red-400 mt-10">데이터를 불러오지 못했습니다.</p>`;
+      document.getElementById(
+        "my-post-list-area"
+      ).innerHTML = `<p class="text-center text-red-400 mt-10">데이터를 불러오지 못했습니다.</p>`;
     }
   } else {
-    document.getElementById("my-post-list-area").innerHTML = `<p class="text-center text-white mt-10">아이디를 입력하고 조회 버튼을 눌러주세요.</p>`;
+    document.getElementById(
+      "my-post-list-area"
+    ).innerHTML = `<p class="text-center text-white mt-10">아이디를 입력하고 조회 버튼을 눌러주세요.</p>`;
   }
 }
 
@@ -1065,7 +1263,13 @@ function searchMyPosts() {
     ? my
         .map(
           (p) =>
-            `<div class="share-list-item" onclick="showPostDetail('${p.ID}')"><p class="text-sm text-gray-300">Date : ${new Date(p.Timestamp).toLocaleDateString()}</p><p class="text-xl font-bold text-white">Title : ${p.Title}</p></div>`
+            `<div class="share-list-item" onclick="showPostDetail('${
+              p.ID
+            }')"><p class="text-sm text-gray-300">Date : ${new Date(
+              p.Timestamp
+            ).toLocaleDateString()}</p><p class="text-xl font-bold text-white">Title : ${
+              p.Title
+            }</p></div>`
         )
         .join("")
     : `<p class="text-center text-white mt-10">'${name}' 님으로 작성된 글이 없습니다.</p>`;
@@ -1084,7 +1288,16 @@ function showPostDetail(id) {
     const n = document.getElementById("comment-name").value,
       c = document.getElementById("comment-input").value;
     if (n && c) {
-      await gasCall("saveComment", { postId: id, commenterName: n, affiliation: "Visitor", commentContent: c }, "POST");
+      await gasCall(
+        "saveComment",
+        {
+          postId: id,
+          commenterName: n,
+          affiliation: "Visitor",
+          commentContent: c,
+        },
+        "POST"
+      );
       document.getElementById("comment-input").value = "";
       fetchComments(id);
     }
@@ -1102,7 +1315,10 @@ async function fetchComments(postId) {
   const res = await gasCall("getComments", { postId }, "GET");
   if (res.success)
     list.innerHTML = res.data
-      .map((c) => `<div class="bg-white/10 p-2 rounded text-sm text-white"><span class="text-[#C5A059] font-bold">${c.CommenterName}:</span> ${c.CommentContent}</div>`)
+      .map(
+        (c) =>
+          `<div class="bg-white/10 p-2 rounded text-sm text-white"><span class="text-[#C5A059] font-bold">${c.CommenterName}:</span> ${c.CommentContent}</div>`
+      )
       .join("");
 }
 
@@ -1134,14 +1350,18 @@ async function startMainPageStats() {
     if (res.success) postDataCache = res.data;
   }
 
-  let count1 = 0, count2 = 0, count3 = 0, countProf = 0, countTotal = 0;
-  postDataCache.forEach(p => {
+  let count1 = 0,
+    count2 = 0,
+    count3 = 0,
+    countProf = 0,
+    countTotal = 0;
+  postDataCache.forEach((p) => {
     if (p.Affiliation) {
       if (p.Affiliation.includes("1학년")) count1++;
       else if (p.Affiliation.includes("2학년")) count2++;
       else if (p.Affiliation.includes("3학년")) count3++;
       else if (p.Affiliation === "교수님") countProf++;
-      
+
       if (p.Affiliation !== "교수님") countTotal++;
     }
   });
@@ -1151,7 +1371,7 @@ async function startMainPageStats() {
     `~ 지금까지 2학년 ${count2}명이 함께했어요! ~`,
     `~ 지금까지 3학년 ${count3}명이 함께했어요! ~`,
     `~ 지금까지 교수님 ${countProf}분이 응원과 조언을 남겨주셨어요! ~`,
-    `~ 지금까지 시각디자인 학과 학생들 중 ${countTotal}명이 함께했어요! ~`
+    `~ 지금까지 시각디자인 학과 학생들 중 ${countTotal}명이 함께했어요! ~`,
   ];
 
   let msgIdx = 0;
@@ -1170,7 +1390,73 @@ async function startMainPageStats() {
 
       statText.classList.remove("opacity-0");
       statText.classList.add("opacity-90");
-    }, 1000); 
+    }, 1000);
+  }, 5000);
+}
 
-  }, 5000); 
+async function openRandomPopup() {
+  if (!postDataCache || postDataCache.length === 0) {
+    document.getElementById("loading-msg").textContent =
+      "데이터 불러오는 중...";
+    document.getElementById("loading-overlay").classList.remove("hidden");
+
+    const result = await gasCall("getPostList", {}, "GET");
+    document.getElementById("loading-overlay").classList.add("hidden");
+
+    if (result.success) {
+      postDataCache = result.data;
+    } else {
+      alert("데이터를 불러올 수 없습니다.");
+      return;
+    }
+  }
+
+  const ornamentPosts = postDataCache.filter(
+    (p) => p.Interests && p.Interests.includes("||ORNAMENT|")
+  );
+
+  if (ornamentPosts.length === 0) {
+    alert("아직 트리에 걸린 오너먼트가 없습니다!");
+    return;
+  }
+
+  const randomIdx = Math.floor(Math.random() * ornamentPosts.length);
+  const targetPost = ornamentPosts[randomIdx];
+
+  let imgUrl = "https://i.imgur.com/zKtjAX7.png";
+  try {
+    const parts = targetPost.Interests.split("|");
+    const extractedUrl = parts[parts.length - 1];
+    if (extractedUrl && extractedUrl.startsWith("http")) {
+      imgUrl = extractedUrl;
+    }
+  } catch (e) {
+    console.error("이미지 파싱 에러", e);
+  }
+
+  document.getElementById("random-ornament-img").src = imgUrl;
+  document.getElementById("random-post-title").textContent = targetPost.Title;
+  document.getElementById("random-post-content").textContent =
+    targetPost.Content;
+  document.getElementById("random-post-name").textContent = targetPost.Name;
+
+  const goBtn = document.getElementById("btn-go-to-comment");
+  goBtn.onclick = function () {
+    closeRandomPopup();
+    goToPage("share_list");
+
+    setTimeout(() => {
+      showPostDetail(targetPost.ID);
+    }, 300);
+  };
+
+  const modal = document.getElementById("random-popup-modal");
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+}
+
+function closeRandomPopup() {
+  const modal = document.getElementById("random-popup-modal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
 }
