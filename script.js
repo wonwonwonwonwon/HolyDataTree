@@ -888,18 +888,62 @@ async function handlePlaceOrnament(orbPoint) {
   }
 }
 
+// script.js 의 searchTreeUser 함수 (이것으로 교체)
+
 function searchTreeUser() {
-  const name = document.getElementById("tree-search-input").value.trim();
+  const nameInput = document.getElementById("tree-search-input");
+  const name = nameInput.value.trim();
+
   if (!name) return;
+
+  // 데이터에서 찾기
   const found = postDataCache.find((p) => p.Name === name);
+
   if (found) {
-    if (found.Affiliation) changeTreeGrade(found.Affiliation);
+    // 1. 해당 사용자가 있는 학년으로 변경
+    if (found.Affiliation) {
+      changeTreeGrade(found.Affiliation);
+    }
+
+    // 2. 오너먼트 위치로 트리 회전
     if (found.Interests && found.Interests.includes("||ORNAMENT|")) {
       const parts = found.Interests.split("|");
       const panelIdx = parseInt(parts[parts.length - 4]);
+
       const targetRotation = -(panelIdx * 20) + 20;
       treeAngle = targetRotation;
       updateTreeRotation();
+
+      // ▼▼▼ [수정됨] 0.1초 뒤에 오너먼트 찾아서 효과 주기 ▼▼▼
+      setTimeout(() => {
+        // 기존 하이라이트 모두 제거
+        document
+          .querySelectorAll(".highlighted")
+          .forEach((el) => el.classList.remove("highlighted"));
+
+        // 닉네임 텍스트가 일치하는 오너먼트 찾기 (공백 제거 후 비교)
+        const allNames = document.querySelectorAll(
+          ".tree-ornament .ornament-name"
+        );
+        let targetEl = null;
+
+        for (let nameEl of allNames) {
+          // 텍스트의 앞뒤 공백을 없애고 비교
+          if (nameEl.textContent.trim() === name) {
+            targetEl = nameEl.parentElement; // 오너먼트 본체(부모) 선택
+            break;
+          }
+        }
+
+        if (targetEl) {
+          targetEl.classList.add("highlighted"); // 클래스 추가
+          nameInput.blur(); // 모바일 키보드 내리기
+        } else {
+          console.log("화면에서 오너먼트를 찾을 수 없습니다.");
+        }
+      }, 100);
+    } else {
+      alert("위치 정보가 없는 사용자입니다.");
     }
   } else {
     alert("존재하지 않는 이름입니다");

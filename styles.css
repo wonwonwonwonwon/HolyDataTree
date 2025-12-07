@@ -1602,3 +1602,40 @@ label,
 .animate-popup-scale {
   animation: popupScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
+/* =========================================================
+   [통합 버전] 검색된 오너먼트 강조 효과 (PC/모바일 공통)
+   ========================================================= */
+
+/* 1. 강조된 오너먼트 위치 설정 (트리 밖으로 툭 튀어나오게 함) */
+.tree-ornament.highlighted {
+  /* [중요] 기존 중앙 정렬(translate)을 유지하면서 Z축으로 150px 앞으로 당김 */
+  transform: translate(-50%, calc(-50% - 6px)) translateZ(150px) !important;
+  z-index: 9999 !important; /* 무조건 맨 위 */
+  pointer-events: auto !important; /* 클릭 가능 */
+}
+
+/* 2. 오너먼트 내부 '이미지'만 커지는 애니메이션 (위치 영향 X) */
+.tree-ornament.highlighted img {
+  animation: ornamentPop 0.8s infinite alternate ease-in-out;
+  filter: drop-shadow(0 0 20px #ffd700) brightness(1.2); /* 금색 빛 */
+}
+@keyframes ornamentPop {
+  0% {
+    transform: scale(1.2);
+  } /* 1.4배 크기에서 시작 */
+  100% {
+    transform: scale(1.4);
+  } /* 1.8배까지 커짐 */
+}
+
+/* 4. 닉네임 이름표 강조 */
+.tree-ornament.highlighted .ornament-name {
+  color: #ffffff !important;
+  padding: 4px 10px;
+  font-weight: 900;
+  font-size: 12px;
+  margin-top: 10px; /* 오너먼트와 간격 */
+
+  /* 이름표도 오너먼트 앞에 잘 보이게 배치 */
+  transform: translateZ(1px);
+}
