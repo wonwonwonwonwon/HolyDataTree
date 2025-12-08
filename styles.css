@@ -1,3 +1,9 @@
+/* [PC 기본] mobile-view-only가 붙은 건 일단 숨김 */
+.mobile-view-only {
+    display: none !important;
+}
+
+
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap");
 
 @font-face {
@@ -1290,9 +1296,34 @@ label,
     background-color: rgba(239, 71, 80, 0.96) !important;
     color: white !important;
   }
-  .arrow-btn {
-    display: none !important;
-  }
+/* 모바일에서 화살표가 보이도록 설정 */
+.arrow-btn {
+    display: flex !important;       /* 숨김 해제! 보이게 설정 */
+    align-items: center;
+    justify-content: center;
+    
+    position: fixed !important;     /* 화면에 고정시킴 */
+    top: 50% !important;            /* 화면 높이의 중간 */
+    transform: translateY(-50%) !important;
+    z-index: 100 !important;        /* 다른 것보다 위에 뜨게 */
+
+    width: 45px !important;         /* 크기는 PC보다 조금 작게 */
+    height: 45px !important;
+    font-size: 1.2rem !important;
+    
+    background: rgba(255, 255, 255, 0.2) !important; /* 반투명 배경 */
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 왼쪽 화살표 위치 */
+#arrow-left {
+    left: 10px !important;          /* 왼쪽 벽에서 10px 떨어짐 */
+}
+
+/* 오른쪽 화살표 위치 */
+#arrow-right {
+    right: 10px !important;         /* 오른쪽 벽에서 10px 떨어짐 */
+}
 
   /* [상세 모달] */
   #post-detail-modal {
@@ -1639,3 +1670,17 @@ label,
   /* 이름표도 오너먼트 앞에 잘 보이게 배치 */
   transform: translateZ(1px);
 }
+
+/* styles.css의 맨 끝부분 모습입니다 */
+
+@media (max-width: 768px) {
+    
+    /* ... (위에 다른 모바일용 코드들이 잔뜩 있을 거예요) ... */
+
+
+    /* ▼▼▼ 여기 빈 공간에 이 코드를 추가하세요 ▼▼▼ */
+    .mobile-view-only {
+        display: block !important; /* 모바일에서는 다시 보여줌! */
+    }
+
+} /* 여기가 파일의 진짜 끝 괄호 */
