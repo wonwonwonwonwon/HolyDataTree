@@ -787,13 +787,16 @@
       <div
         class="flex flex-row w-full max-w-[1200px] h-[85vh] gap-6 p-4 justify-center items-stretch relative"
       >
-        <div
-          class="flex-[1.5] h-full relative bg-contain bg-no-repeat bg-center pl-[175px] pr-[230px] pt-[8px] pb-[100px] overflow-y-auto dark-cursor-area"
-          style="
-            background-image: url('https://i.imgur.com/3YOgwUI.png');
-            background-size: 210% 120%;
-          "
-        >
+      <div
+        class="flex-[1.5] h-full relative bg-no-repeat bg-center pl-[100px] pr-[100px] pt-[50px] pb-[50px] overflow-y-auto dark-cursor-area"
+        style="
+          background-image: url('images/bg-common.png'); /* 혹은 사용 중인 편지 배경 이미지 */
+          
+          /* 핵심 수정: 비율 고정 */
+          background-size: contain; 
+          background-position: center;
+        "
+      >
           <div class="w-full h-full flex flex-col pt-[60px]">
             <h2
               class="font-school font-bold text-left border-b-2 border-[#9d5050] pb-3 mb-2 text-xl text-[#4a2d2d]"
